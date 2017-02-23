@@ -7,7 +7,6 @@ import { User } from '../../model/user';
 
 @Component({
   selector: 'page-newsForm',
-  providers: [UserService, NewsService],
   templateUrl: 'newsForm.html'
 })
 

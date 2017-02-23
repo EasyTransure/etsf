@@ -6,7 +6,6 @@ import { UserService } from '../../services/user/userService';
 
 @Component({
   selector: 'page-userForm',
-  providers: [UserService],
   templateUrl: 'userForm.html'
 })
 

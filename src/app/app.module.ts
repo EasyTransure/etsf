@@ -6,8 +6,8 @@ import { NewsForm } from './pages/newsForm/newsForm';
 import { UserForm } from './pages/userForm/userForm';
 import { NewsList } from './pages/newsList/newsList';
 import { NewsDescription } from './pages/newsDescription/newsDescription';
-//import { UserService } from './services/user/userService';
-//import { NewsService } from './services/news/newsService';
+import { UserService } from './services/user/userService';
+import { NewsService } from './services/news/newsService';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,6 @@ import { NewsDescription } from './pages/newsDescription/newsDescription';
     NewsForm,
     UserForm
   ],
-  providers: [ {provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [ {provide: ErrorHandler, useClass: IonicErrorHandler}, UserService, NewsService ]
 })
 export class AppModule {}

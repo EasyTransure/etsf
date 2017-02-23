@@ -4,7 +4,7 @@ import {Home} from './app/pages/pages';
 import {News} from './app/model/_model';
 import {NewsService} from './app/services/services';
 
-
+/* tslint disable */
 describe('Init coverage test', () =>{
   it('should just launch, but it will additionally ensure coverage is done on all files', () =>{
     // We are forced to instantiate at least one object, or Typescript compiler removes the import, as it is unused.

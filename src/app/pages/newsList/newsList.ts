@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NewsService } from '../../services/news/newsService';
 import { News } from '../../model/news';
@@ -6,11 +6,10 @@ import { NewsDescription } from '../newsDescription/newsDescription'
 
 @Component({
   selector: 'page-newsList',
-  providers: [NewsService],
   templateUrl: 'newsList.html'
 })
 
-export class NewsList  implements OnInit {
+export class NewsList  {
   public myNews: News[];
 
   constructor(public nav: NavController, private _newsService: NewsService) { }
@@ -19,7 +18,7 @@ export class NewsList  implements OnInit {
     this.nav.push(NewsDescription, { newsInfo: newsInfo });
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getAllNews();
   }
     
