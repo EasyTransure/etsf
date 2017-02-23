@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Description
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+      <ion-card-header>
+        <h2>{{ newsInfo.title}}</h2>
+      </ion-card-header>
+      <ion-card-content>
+        {{ newsInfo.description }}
+      </ion-card-content>
+      <ion-card-content>
+        <p> By : {{ newsInfo.Name }} on the {{ newsInfo.date_red }} </p>
+      </ion-card-content>
+  </ion-card>
+</ion-content>

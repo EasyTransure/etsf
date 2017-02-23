@@ -17,3 +17,6 @@ A chaque nouveau déploiement :
 ### Sur le téléphone android
 Si ce n'est pas déjà fait : `ionic platform add android`
 A chaque nouveau déploiement : `ionic run android`
+
+### Sur le traduction
+Voici une piste : `https://ionicframework.com/docs/v2/resources/ng2-translate/`

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Journal de Bord</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+<div *ngFor = "let newsInfo of myNews">
+  <ion-card>
+		<ion-card-header>
+	   <ion-item>
+			 <a ion-item (click)="goToDetails(newsInfo)">
+					{{ newsInfo.title }}
+					<ion-icon name="arrow-dropright" item-right></ion-icon>
+    	 </a>
+	   </ion-item>
+		</ion-card-header>
+		<ion-card-content>
+        <p>	By : {{ newsInfo.Name }} on the {{ newsInfo.date_red }}</p>
+		</ion-card-content>
+	</ion-card>
+</div>
+</ion-content>

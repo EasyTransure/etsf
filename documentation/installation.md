@@ -9,7 +9,10 @@ Une fois nodejs installé, lancer dans une invite de commande :
 ```
 npm i -g ionic typings cordova karma-cli
 ```
-
+Une fois install de ionic terminer, se mettre dans le projet en invité de cmd
+```
+npm i 
+```
 # Installation de l'IDE
 
 Le développement d'Ange Gardien est prévu pour être effectué dans l'outil __Visual Studio Code__

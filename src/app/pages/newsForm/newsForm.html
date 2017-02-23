@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Formulaire Journal</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<form (ngSubmit)="onSubmit()">
+		<ion-list no-lines>
+			<ion-item>
+				<ion-label floating>Title</ion-label>
+				<ion-input type="text" [(ngModel)]="news.title" [ngModelOptions]="{standalone: true}" required></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label floating>Description</ion-label>
+				<ion-input type="text" [(ngModel)]="news.description" [ngModelOptions]="{standalone: true}" ></ion-input>
+			</ion-item>
+	  
+			<ion-item>
+				<ion-label floating>Date</ion-label>
+				<ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="news.date_red" [ngModelOptions]="{standalone: true}"></ion-datetime>
+			</ion-item>
+	  
+			<ion-item>
+				<ion-label floating>Utilisateur</ion-label>
+        <ion-select id="user" class="form-control" [(ngModel)]="news.id_user" [ngModelOptions]="{standalone: true}">
+          <ion-option *ngFor="let user of users" [value]="user.id_user">{{ user.name }}</ion-option>
+        </ion-select>
+			</ion-item>
+	  
+			<ion-item>
+				<button ion-button block type="submit">Valider</button>
+			</ion-item>
+		</ion-list>
+	</form>
+</ion-content>
