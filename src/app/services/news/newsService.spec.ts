@@ -1,4 +1,4 @@
-import {NewsService} from './newsService';
+import {NewsService} from '../services';
 import { Observable } from 'rxjs/Observable';
 
 describe('News service', () => {

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { NewsService } from '../../services/news/newsService';
-import { News } from '../../model/news';
-import { NewsDescription } from '../newsDescription/newsDescription'
+import { News }       from '../../model/_model'; 
+import { NewsService } from '../../services/services';
+import { NewsDescription } from '../pages'
 
 @Component({
   selector: 'page-newsList',

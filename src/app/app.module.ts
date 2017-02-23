@@ -1,13 +1,9 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { Home } from './pages/home/home';
-import { NewsForm } from './pages/newsForm/newsForm';
-import { UserForm } from './pages/userForm/userForm';
-import { NewsList } from './pages/newsList/newsList';
-import { NewsDescription } from './pages/newsDescription/newsDescription';
-import { UserService } from './services/user/userService';
-import { NewsService } from './services/news/newsService';
+import { Home, NewsForm, UserForm, NewsList, NewsDescription } from './pages/pages';
+import { UserService, NewsService } from './services/services';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +26,6 @@ import { NewsService } from './services/news/newsService';
     NewsForm,
     UserForm
   ],
-  providers: [ {provide: ErrorHandler, useClass: IonicErrorHandler}, UserService, NewsService ]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, UserService, NewsService]
 })
-export class AppModule {}
+export class AppModule { }

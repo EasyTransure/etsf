@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { News }       from '../../model/news'; 
-import { UserService } from '../../services/user/userService';
-import { NewsService } from '../../services/news/newsService';
-import { User } from '../../model/user';
+import { News, User }       from '../../model/_model'; 
+import { UserService,NewsService } from '../../services/services';
+
 
 @Component({
   selector: 'page-newsForm',
