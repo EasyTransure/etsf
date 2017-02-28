@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { News }       from '../../model/_model'; 
 import { NewsService } from '../../services/services';
-import { NewsDescription, NewsForm } from '../pages';
+import { NewsDescription, NewsForm } from '../pages'
 
 @Component({
-  selector: 'page-newsList',
-  templateUrl: 'newsList.html'
+  selector: 'page-myNewsList',
+  templateUrl: 'myNewsList.html'
 })
 
-export class NewsList  {
-  public allNews: News[];
+export class MyNewsList  {
+  public myNews: News[];
 
   constructor(public nav: NavController, private _newsService: NewsService) { }
   
@@ -23,9 +23,9 @@ export class NewsList  {
   }
 
   ionViewWillEnter() {
-    this.getAllNews();
+    this.getMyNews(1);
   }
-  
+   
   searchNews(ev) {
     let val = ev.target.value;
 
@@ -33,13 +33,13 @@ export class NewsList  {
       console.log("I am searching...");
     }
   }
-  
-  public getAllNews(): void {
+   
+  public getMyNews(id_user: number): void {
     this._newsService
-        .getNews()
-        .subscribe((data: News[]) => this.allNews = data,
+        .getMyNews(id_user)
+        .subscribe((data: News[]) => this.myNews = data,
            error => console.log(error),
-           () => console.log('Get all News complete'));
+           () => console.log('Get all my News complete'));
   }
 
 }

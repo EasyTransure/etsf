@@ -12,5 +12,10 @@ export class NewsDescription {
   constructor( public params: NavParams ) { 
     this.newsInfo = params.data.newsInfo;
   }  
+  
+  followPerson(id_user) {
+    //Function to follow some one
+    console.log(id_user);
+  }
 
 }

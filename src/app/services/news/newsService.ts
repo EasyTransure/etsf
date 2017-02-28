@@ -20,9 +20,18 @@ export class NewsService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-
-  getANews(id_news: number): Observable<News> {
-    return this.http.get(this.baseUrl + 'news/' + id_news)
+/*
+  getNewsCount(): any {
+    this.getNews()
+    /*
+    return this.http.get(this.baseUrl + 'news/count')
+      .map(this.extractData)
+      .catch(this.handleError);
+      
+  }
+*/
+  getMyNews(id_user: number): Observable<News[]> {
+    return this.http.get(this.baseUrl + 'news/' + id_user)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -38,17 +47,18 @@ export class NewsService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-
+/*
   deleteNews(id_news: number): Observable<Response> {
     return this.http.delete(this.baseUrl + id_news)
       .catch(this.handleError);
   }
-
+*/
   private extractData(res: Response): any {
     if (res.status < 200 || res.status >= 300) {
       throw new Error('Bad response status: ' + res.status);
     }
     let body = res.json();
+    //console.log(body.length);
     return body || {};
   }
 

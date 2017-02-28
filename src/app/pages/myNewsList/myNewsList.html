@@ -12,7 +12,7 @@
 		<button ion-fab (click)="createANews()" color="secondary" mini><ion-icon name="add"></ion-icon></button>
 	</ion-fab>
 	<ion-searchbar (ionInput)="searchNews($event)"></ion-searchbar>
-	<div *ngFor = "let newsInfo of allNews">
+	<div *ngFor = "let newsInfo of myNews">
 		<ion-card>
 			<ion-card-header>
 			<ion-item>

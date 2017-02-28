@@ -1,4 +1,4 @@
-import {NewsService} from '../services';
+import { NewsService } from '../services';
 import { Observable } from 'rxjs/Observable';
 
 describe('News service', () => {
@@ -19,9 +19,9 @@ describe('News service', () => {
   });
 
   describe('getANews', () => {
-    it('should return a particular news', () => {
+    it('should return all the news of he connected user', () => {
       mockHttp.get.and.returnValue(Observable.of([{}]));
-      newsService.getANews(1);
+      newsService.getMyNews(1);
 
       expect(mockHttp.get).toHaveBeenCalled();
     });
