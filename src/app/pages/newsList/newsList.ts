@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { News }       from '../../model/_model'; 
+import { News }       from '../../model/_model';
 import { NewsService } from '../../services/services';
 import { NewsDescription } from '../pages'
 
@@ -10,10 +10,10 @@ import { NewsDescription } from '../pages'
 })
 
 export class NewsList  {
-  public myNews: News[];
+  public myNews: News[] = [];
 
   constructor(public nav: NavController, private _newsService: NewsService) { }
-  
+
   goToDetails(newsInfo) {
     this.nav.push(NewsDescription, { newsInfo: newsInfo });
   }
@@ -21,7 +21,7 @@ export class NewsList  {
   ionViewWillEnter() {
     this.getAllNews();
   }
-    
+
   public getAllNews(): void {
     this._newsService
         .getNews()
