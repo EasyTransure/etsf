@@ -11,9 +11,10 @@ import { NewsDescription, NewsForm } from '../pages';
 
 export class NewsList  {
   public allNews: News[] = [];
+  public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
   constructor(public nav: NavController, private _newsService: NewsService) { }
-  
+
   createANews() {
     this.nav.push(NewsForm);
   }
@@ -25,7 +26,7 @@ export class NewsList  {
   ionViewWillEnter() {
     this.getAllNews();
   }
-  
+
   searchNews(ev) {
     let val = ev.target.value;
 
@@ -33,12 +34,15 @@ export class NewsList  {
       console.log("I am searching...");
     }
   }
-  
+
   public getAllNews(): void {
     this._newsService
         .getNews()
         .subscribe((data: News[]) => this.allNews = data,
-           error => console.log(error),
+           error =>{
+              this.errorOccurred = true;
+              console.log(error)
+           },
            () => console.log('Get all News complete'));
   }
 
