@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { Home, NewsForm, UserForm, NewsList, NewsDescription } from './pages/pages';
+import { Home, NewsForm, UserForm, NewsList, NewsDescription, MyNewsList, Tabs, MyProfile } from './pages/pages';
 import { UserService, NewsService } from './services/services';
 
 
@@ -10,9 +10,12 @@ import { UserService, NewsService } from './services/services';
     MyApp,
     Home,
     NewsList,
+    MyNewsList,
     NewsDescription,
     NewsForm,
-    UserForm
+    UserForm,
+    Tabs,
+    MyProfile
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -22,9 +25,12 @@ import { UserService, NewsService } from './services/services';
     MyApp,
     Home,
     NewsList,
+    MyNewsList,
     NewsDescription,
     NewsForm,
-    UserForm
+    UserForm,
+    Tabs,
+    MyProfile
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, UserService, NewsService]
 })

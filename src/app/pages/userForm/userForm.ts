@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'; 
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../model/_model';
 import { UserService } from '../../services/services';
 
@@ -9,20 +9,23 @@ import { UserService } from '../../services/services';
 })
 
 export class UserForm {
-  private user = new User(7, '', '', '', '');
+  private user: User;
 
-  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public _userService: UserService) { }
+  constructor( public params: NavParams, public alertCtrl: AlertController, public navCtrl: NavController, public _userService: UserService) { 
+    this.user = params.data.user;
+  }
 
   public onSubmit() {
-    this.addUser(this.user);
+    this.updateUser(this.user);
     console.log(this.user);
     let alert = this.alertCtrl.create({
-      title: 'New User',
-      subTitle: 'Utilisateur ajouté avec succèss!'
+      title: 'Edit User',
+      subTitle: 'Utilisateur mis à jour avec succèss!'
     });
     alert.present();
   }
 
+  /*
   private addUser(user): void {
     this._userService
       .addUser(user)
@@ -30,13 +33,14 @@ export class UserForm {
       error => console.log(error),
       () => console.log('User Added'));
   }
-  /*
-    private updateUser(user): void {
-      this._userService
-          .updateUser(user.id_user, user)
-          .subscribe((data: User) => this.user = data,
-             error => console.log(error),
-             () => console.log('User Added'));
-    }
   */
+
+  private updateUser(user): void {
+    this._userService
+        .updateUser(user.id_user, user)
+        .subscribe((data: User) => this.user = data,
+           error => console.log(error),
+           () => console.log('User Modified'));
+  }
+  
 }

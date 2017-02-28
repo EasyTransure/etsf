@@ -15,7 +15,7 @@ describe('Page: News List', () => {
 
   describe('at initialization', () => {
     it('should initialize the news as an empty array', () => {
-      expect(component.myNews).toEqual([]);
+      expect(component.allNews).toEqual([]);
     });
   });
 
@@ -29,8 +29,8 @@ describe('Page: News List', () => {
 
     it('should load all the news', (done) => {
       response.subscribe( () => {
-        expect(component.myNews.length).toBe(1);
-        expect(component.myNews[0].id_news).toBe(1);
+        expect(component.allNews.length).toBe(1);
+        expect(component.allNews[0].id_news).toBe(1);
         done();
       });
     });

@@ -8,7 +8,8 @@ import { User } from '../../model/_model';
 export class UserService{
   private baseUrl = 'http://localhost/web/news-service/';
   private headers: Headers;
-  constructor ( private http: Http){this.headers = new Headers();
+  constructor ( private http: Http ){
+    this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
     this.headers.append('Accept', 'application/json');
   }
@@ -20,7 +21,13 @@ export class UserService{
   }
 
   getAUser (id_user: number): Observable<User> {
-    return this.http.get(this.baseUrl+'user/'+id_user)
+    return this.http.get(this.baseUrl+'user/'+ id_user)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getTheUser (user: User): Observable<User> {
+    return this.http.post(this.baseUrl + 'login', JSON.stringify( user ), { headers: this.headers })
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -43,18 +50,18 @@ export class UserService{
   }
 
 
-   private extractData(res: Response): any {
-       if (res.status < 200 || res.status >= 300) {
-             throw new Error('Bad response status: ' + res.status);
-           }
-       let body = res.json();
-       return body || { };
+  private extractData(res: Response): any {
+    if (res.status < 200 || res.status >= 300) {
+       throw new Error('Bad response status: ' + res.status);
     }
+    let body = res.json();
+    return body || { };
+  }
 
   private handleError (error: any) {
-      let errMsg = error.message || 'Server error';
-      console.error(errMsg); // log to console instead
-      return Observable.throw(errMsg);
+    let errMsg = error.message || 'Server error';
+    console.error(errMsg); // log to console instead
+    return Observable.throw(errMsg);
   }
 
 }
