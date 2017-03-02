@@ -26,7 +26,7 @@ export class NewsList  {
   ionViewWillEnter() {
     this.getAllNews();
   }
-
+/*
   searchNews(ev) {
     let val = ev.target.value;
 
@@ -34,7 +34,7 @@ export class NewsList  {
       console.log("I am searching...");
     }
   }
-
+*/
   public getAllNews(): void {
     this._newsService
         .getNews()

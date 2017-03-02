@@ -14,6 +14,9 @@ La première fois :
 A chaque nouveau déploiement :
 `ionic build android`
 
+### Pour executer le test coverage
+`npm run test:coverage`
+
 ### Sur le téléphone android
 Si ce n'est pas déjà fait : `ionic platform add android`
 A chaque nouveau déploiement : `ionic run android`

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
+import { User } from '../../model/_model'
 
 @Component({
   selector: 'page-login',
@@ -7,19 +8,14 @@ import { NavController, AlertController } from 'ionic-angular';
 })
 
 export class Login {
-  
+  public user: User = new User(1, '', '', '', '');
+  public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
-  constructor( public alertCtrl: AlertController, public navCtrl: NavController) { 
-    
+  constructor( public alertCtrl: AlertController, public navCtrl: NavController ) { }
+/*
+  onSubmit() {
+
   }
+*/
 
-  public onSubmit() {
-    
-    let alert = this.alertCtrl.create({
-      title: 'New News',
-      subTitle: 'News ajouté avec success!'
-    });
-    alert.present();
-  } 
-  
 }

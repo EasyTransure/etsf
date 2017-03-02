@@ -1,40 +1,25 @@
 <ion-header>
-  <ion-navbar>
-		<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Formulaire Journal</ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title>Connexion</ion-title>
+	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
 	<form (ngSubmit)="onSubmit()">
-		<ion-list>
+		<ion-list no-lines>
 			<ion-item>
-				<ion-label floating>Title</ion-label>
-				<ion-input type="text" [(ngModel)]="news.title" [ngModelOptions]="{standalone: true}"></ion-input>
+				<ion-label stacked-label>{{ user.name }}</ion-label>
+				<ion-input type="text" [(ngModel)]="name" placeholder="admin" ngControl="name"></ion-input>
 			</ion-item>
 
 			<ion-item>
-				<ion-label floating>Description</ion-label>
-				<ion-input type="text" [(ngModel)]="news.description" [ngModelOptions]="{standalone: true}"></ion-input>
-			</ion-item>
-	  
-			<ion-item>
-				<ion-label floating>Date</ion-label>
-				<ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="news.date_red" [ngModelOptions]="{standalone: true}"></ion-datetime>
-			</ion-item>
-	  
-			<ion-item>
-				<ion-label floating>Utilisateur</ion-label>
-        <ion-select id="user" class="form-control" [(ngModel)]="news.id_user" [ngModelOptions]="{standalone: true}">
-          <ion-option *ngFor="let user of users" [value]="user.id_user">{{ user.name }}</ion-option>
-        </ion-select>
+				<ion-label stacked-label>{{ user.password }}</ion-label>
+				<ion-input type="password" [(ngModel)]="password" placeholder="admin" ngControl="password"></ion-input>
 			</ion-item>
 		</ion-list>
-	  
+
 		<ion-item>
-			<button ion-button block type="submit">Valider</button>
+			<button ion-button block type="submit">Se connecter</button>
 		</ion-item>
 	</form>
 </ion-content>

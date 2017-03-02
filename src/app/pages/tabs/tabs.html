@@ -1,5 +1,5 @@
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="All news" tabBadge="0" tabBadgeStyle="danger" tabIcon="md-home"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="My News" tabBadge="3" tabBadgeStyle="danger" tabIcon="md-clipboard"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="My Profile" tabIcon="md-people"></ion-tab>
+  <ion-tab [root]="tab1Root" tabTitle="All news" tabBadge="{{tabCount1}}" tabIcon="md-home"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Followed News" tabBadge="{{tabCount2}}" tabIcon="md-clipboard"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="My News" tabBadge="{{tabCount3}}" tabIcon="md-clipboard"></ion-tab>
 </ion-tabs>

@@ -7,3 +7,4 @@ export * from './myNewsList/myNewsList';
 export * from './userForm/userForm';
 export * from './tabs/tabs';
 export * from './myProfile/myProfile';
+export * from './myFollowedList/myFollowedList'

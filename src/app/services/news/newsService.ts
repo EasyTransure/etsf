@@ -2,14 +2,17 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs';
 import { Observable } from 'rxjs/Observable';
-import { News } from '../../model/_model';
+import { News, Follow } from '../../model/_model';
+import { ServiceBase } from '../serviceBase/serviceBase'
 
 @Injectable()
-export class NewsService {
+export class NewsService extends ServiceBase{
   private baseUrl = 'http://localhost/web/news-service/';
   private headers: Headers;
+
   constructor(private http: Http) {
-  this.headers = new Headers();
+    super();
+    this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
     this.headers.append('Accept', 'application/json');
 
@@ -20,16 +23,13 @@ export class NewsService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-/*
-  getNewsCount(): any {
-    this.getNews()
-    /*
-    return this.http.get(this.baseUrl + 'news/count')
+  
+  getFollowedNews(id_user: number): Observable<News[]> {
+    return this.http.get(this.baseUrl + 'news/follow/' + id_user)
       .map(this.extractData)
       .catch(this.handleError);
-      
   }
-*/
+  
   getMyNews(id_user: number): Observable<News[]> {
     return this.http.get(this.baseUrl + 'news/' + id_user)
       .map(this.extractData)
@@ -47,25 +47,16 @@ export class NewsService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-/*
+
   deleteNews(id_news: number): Observable<Response> {
     return this.http.delete(this.baseUrl + id_news)
       .catch(this.handleError);
   }
-*/
-  private extractData(res: Response): any {
-    if (res.status < 200 || res.status >= 300) {
-      throw new Error('Bad response status: ' + res.status);
-    }
-    let body = res.json();
-    //console.log(body.length);
-    return body || {};
-  }
 
-  private handleError(error: any) {
-    let errMsg = error.message || 'Server error';
-    console.log(errMsg); // log to console instead
-    return Observable.throw(errMsg);
+  followNews(id_user: number, news: News): Observable<Follow> {
+    return this.http.post(this.baseUrl + 'news/' + id_user, JSON.stringify(news), { headers: this.headers })
+       .map(this.extractData)
+       .catch(this.handleError);
   }
 
 }

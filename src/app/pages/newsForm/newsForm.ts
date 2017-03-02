@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { News, User }       from '../../model/_model'; 
-import { UserService,NewsService } from '../../services/services';
+import { UserService, NewsService } from '../../services/services';
 
 
 @Component({
@@ -10,21 +10,20 @@ import { UserService,NewsService } from '../../services/services';
 })
 
 export class NewsForm {
-  private users: User[];
-  private date: string = new Date().toISOString(); 
-  private news = new News ( 0, '', '', this.date, 1);
+  public users: User[] = [];
+  public d: Date = new Date();
+  public date = this.d.getFullYear() + "-" + ("0"+(this.d.getMonth()+1)).slice(-2) + "-" + ("0" + this.d.getDate()).slice(-2);
+  public news = new News ( 0, '', '', this.date, 1); 
+  public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
-  constructor( public alertCtrl: AlertController, private _newsService: NewsService, public navCtrl: NavController, public _userService: UserService ) { 
+
+  constructor( public alertCtrl: AlertController, private _newsService: NewsService,
+   public navCtrl: NavController, public _userService: UserService ) { 
     
   }
 
   public onSubmit() {
     this.addNews(this.news);
-    let alert = this.alertCtrl.create({
-      title: 'New News',
-      subTitle: 'News ajouté avec success!'
-    });
-    alert.present();
   } 
 
   ionViewWillEnter() {
@@ -35,7 +34,10 @@ export class NewsForm {
     this._newsService
         .addNews(news)
         .subscribe((data: News) => this.news = data,
-           error => console.log(error),
+           error =>{
+              this.errorOccurred = true;
+              console.log(error)
+           },
            () => console.log('News Added'));
   }
 
@@ -50,11 +52,14 @@ export class NewsForm {
 */
 
   private getUsers(): void {
-      this._userService
-          .getUsers()
-          .subscribe((data: User[]) => this.users = data,
-              error => console.log(error),
-              () => console.log('Get all Users complete'));
+    this._userService
+        .getUsers()
+        .subscribe((data: User[]) => this.users = data,
+            error =>{
+              this.errorOccurred = true;
+              console.log(error)
+           },
+           () => console.log('Get all Users complete'));
   }
 
 }

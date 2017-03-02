@@ -1,18 +1,18 @@
-import { MyNewsList } from './myNewsList';
+import { MyFollowedList } from './myFollowedList';
 import { NewsForm, NewsDescription } from '../pages';
 import { NavController } from 'ionic-angular';
 import { News } from '../../model/_model';
 import { Observable } from 'rxjs/Observable';
 
-describe('Page: My News List', () => {
-  let component: MyNewsList;
+describe('Page: My Followed News List', () => {
+  let component: MyFollowedList;
   let navController: NavController;
   let newsServiceMock: any;
 
   beforeEach(() => {
-    newsServiceMock = jasmine.createSpyObj('newsService', ['getMyNews']);
+    newsServiceMock = jasmine.createSpyObj('newsService', ['getFollowedNews']);
     navController = jasmine.createSpyObj('navController', ['push']);
-    component = new MyNewsList(navController, newsServiceMock);
+    component = new MyFollowedList(navController, newsServiceMock);
   });
 
   describe('at initialization', () => {
@@ -29,16 +29,16 @@ describe('Page: My News List', () => {
 
     it('should call the NewsService', () => {
       response = Observable.of([]).delay(1);
-      newsServiceMock.getMyNews.and.returnValue(response);
+      newsServiceMock.getFollowedNews.and.returnValue(response);
       component.ionViewWillEnter();
 
-      expect(newsServiceMock.getMyNews).toHaveBeenCalled();
+      expect(newsServiceMock.getFollowedNews).toHaveBeenCalled();
     });
 
     describe('upon successful response', () => {
       beforeEach(() => {
         response = Observable.of([new News(1, 'Title', 'Desc', 'now', 3)]).delay(1);
-        newsServiceMock.getMyNews.and.returnValue(response);
+        newsServiceMock.getFollowedNews.and.returnValue(response);
         component.ionViewWillEnter();
       });
 
@@ -56,7 +56,7 @@ describe('Page: My News List', () => {
         response = Observable.create((observer) => {
           observer.error();
         }).delay(1);
-        newsServiceMock.getMyNews.and.returnValue(response);
+        newsServiceMock.getFollowedNews.and.returnValue(response);
         component.ionViewWillEnter();
 
         response.subscribe(() => { }, () => {

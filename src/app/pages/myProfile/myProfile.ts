@@ -10,26 +10,28 @@ import { UserForm } from '../pages';
 })
 
 export class MyProfile {
-  public user: User;
+  public user: User = new User(1, '', '', '', '');
+  public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
-  constructor( public nav: NavController, public params: NavParams, public _userService: UserService ) { }
+  constructor(public nav: NavController, public params: NavParams, public _userService: UserService) { }
 
   ionViewWillEnter() {
-    this.getUser(1);
+    this.getUser(this.user.id_user);
   }
 
-  updateAUser(user: User) {
+  public updateAUser(user: User) {
     this.nav.push(UserForm, { user: user });
   }
 
-  private getUser(id_user: number): void {
+  public getUser(id_user: number): void {
     this._userService
-        .getAUser(id_user)
-        .subscribe((data: User) => this.user = data,
-            error => console.log(error),
-            () => console.log('Get all Users complete'));
-            
-    console.log("this.user");
+      .getAUser(id_user)
+      .subscribe((data: User) => this.user = data,
+      error => {
+        this.errorOccurred = true;
+        console.log(error)
+      },
+      () => console.log('Get all Users complete'));
   }
- 
+
 }

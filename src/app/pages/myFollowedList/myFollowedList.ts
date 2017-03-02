@@ -5,11 +5,11 @@ import { NewsService } from '../../services/services';
 import { NewsDescription, NewsForm } from '../pages'
 
 @Component({
-  selector: 'page-myNewsList',
-  templateUrl: 'myNewsList.html'
+  selector: 'page-myFollowedList',
+  templateUrl: 'myFollowedList.html'
 })
 
-export class MyNewsList  {
+export class MyFollowedList  {
   public myNews: News[] = []; 
   public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
@@ -25,7 +25,7 @@ export class MyNewsList  {
   }
 
   ionViewWillEnter() {
-    this.getMyNews(1);
+    this.getFollowedNews(1);
   }
 /*   
   searchNews(ev) {
@@ -36,15 +36,15 @@ export class MyNewsList  {
     }
   }
 */   
-  public getMyNews(id_user: number): void {
+  public getFollowedNews(id_user: number): void {
     this._newsService
-        .getMyNews(id_user)
+        .getFollowedNews(id_user)
         .subscribe((data: News[]) => this.myNews = data,
            error =>{
               this.errorOccurred = true;
               console.log(error)
            },
-           () => console.log('Get all my News complete'));
+           () => console.log('Get all my followed News complete'));
   }
 
 }

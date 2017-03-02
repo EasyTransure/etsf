@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'; 
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 import { User } from '../../model/_model';
 import { UserService } from '../../services/services';
 
@@ -9,20 +9,16 @@ import { UserService } from '../../services/services';
 })
 
 export class UserForm {
-  private user: User;
+  public user: User = new User(1, '', '', '', '');
+  public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
-  constructor( public params: NavParams, public alertCtrl: AlertController, public navCtrl: NavController, public _userService: UserService) { 
+  constructor(public params: NavParams, public navCtrl: NavController, public _userService: UserService) {
     this.user = params.data.user;
   }
 
   public onSubmit() {
     this.updateUser(this.user);
     console.log(this.user);
-    let alert = this.alertCtrl.create({
-      title: 'Edit User',
-      subTitle: 'Utilisateur mis à jour avec succèss!'
-    });
-    alert.present();
   }
 
   /*
@@ -30,17 +26,23 @@ export class UserForm {
     this._userService
       .addUser(user)
       .subscribe((data: User) => this.user = data,
-      error => console.log(error),
+      error =>{
+              this.errorOccurred = true;
+              console.log(error)
+           },
       () => console.log('User Added'));
   }
   */
 
   private updateUser(user): void {
     this._userService
-        .updateUser(user.id_user, user)
-        .subscribe((data: User) => this.user = data,
-           error => console.log(error),
-           () => console.log('User Modified'));
+      .updateUser(user.id_user, user)
+      .subscribe((data: User) => this.user = data,
+      error => {
+        this.errorOccurred = true;
+        console.log(error)
+      },
+      () => console.log('User Modified'));
   }
-  
+
 }
