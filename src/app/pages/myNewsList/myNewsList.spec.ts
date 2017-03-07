@@ -1,27 +1,34 @@
-/*import { MyNewsList } from './myNewsList';
+import { MyNewsList } from './myNewsList';
 import { NewsForm, NewsDescription } from '../pages';
-import { NavController } from 'ionic-angular';
+import { NavController, ActionSheetController } from 'ionic-angular';
 import { News } from '../../model/_model';
 import { Observable } from 'rxjs/Observable';
 
 describe('Page: My News List', () => {
   let component: MyNewsList;
   let navController: NavController;
+  let actionSheetCtrl: ActionSheetController;
+  //let actionSheet: ActionSheet;
   let newsServiceMock: any;
 
   beforeEach(() => {
     newsServiceMock = jasmine.createSpyObj('newsService', ['getMyNews']);
     navController = jasmine.createSpyObj('navController', ['push']);
-    component = new MyNewsList(navController, newsServiceMock);
+    actionSheetCtrl = jasmine.createSpyObj('actionSheetCtrl', ['create']);
+    //actionSheet = jasmine.createSpyObj('actionSheet', ['present']);
+    component = new MyNewsList(navController, newsServiceMock, actionSheetCtrl);
   });
 
   describe('at initialization', () => {
     it('should initialize the news as an empty array', () => {
       expect(component.myNews).toEqual([]);
     });
+    it('should initialize the type to empty', () => {
+      expect(component.type).toEqual('');
+    });
     it('should initialize the error indicator to false', () => {
       expect(component.errorOccurred).toBe(false);
-    })
+    });
   });
 
   describe('ionViewWillEnter', () => {
@@ -71,7 +78,9 @@ describe('Page: My News List', () => {
   describe('createANews', () => {
     it('should redirect to news creation page', () => {
       component.createANews();
+      expect(actionSheetCtrl.create).toHaveBeenCalled();
       expect(navController.push).toHaveBeenCalledWith(NewsForm);
+      //expect(actionSheet.present).toHaveBeenCalled();
     });
   });
 
@@ -83,4 +92,3 @@ describe('Page: My News List', () => {
     });
   });
 });
-*/

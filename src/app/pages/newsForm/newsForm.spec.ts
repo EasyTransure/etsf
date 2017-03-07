@@ -14,17 +14,19 @@ describe('Page: News Form', () => {
   let news: News;
   let d: Date = new Date();
   let date: string;
-  let type: string = 'Medication';
+  let type: string;
+  let label: string;
 
   beforeEach(() => {
     userServiceMock = jasmine.createSpyObj('userService', ['getUsers']);
     newsServiceMock = jasmine.createSpyObj('newsService', ['addNews']);
     navController = jasmine.createSpyObj('navController', ['push']);
     altController = jasmine.createSpyObj('altController', ['present']);
-    params = { data: { type: type }, get: null };
+    params = { data: { type: 'Medication' }, get: null };
     date = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
-  
-    news = new News (0, '', '', date, 1);
+    type = params.data.type;
+    news = new News (0, type, '', date, 1);
+    label = 'md-analytics';
     component = new NewsForm(params, altController, newsServiceMock, navController, userServiceMock);
   });
 
@@ -37,52 +39,15 @@ describe('Page: News Form', () => {
     });
     it('should initialize the date to sysdate', () => {
       expect(component.date).toBe(date);
-    })
-  });
-/*
-  describe('ionViewWillEnter', () => {
-    let response: Observable<User[]>;
-
-    it('should call the UserService', () => {
-      response = Observable.of([]).delay(1);
-      userServiceMock.getUsers.and.returnValue(response);
-      component.ionViewWillEnter();
-
-      expect(userServiceMock.getUsers).toHaveBeenCalled();
     });
-
-    describe('upon successful response', () => {
-      beforeEach(() => {
-        response = Observable.of([new User(1, 'name', 'surname', 'password', 'email')]).delay(1);
-        userServiceMock.getUsers.and.returnValue(response);
-        component.ionViewWillEnter();
-      });
-
-      it('should load all the users', (done) => {
-        response.subscribe(() => {
-          expect(component.users.length).toBe(1);
-          expect(component.users[0].id_user).toBe(1);
-          done();
-        });
-      });
+    it('should initialize the label to empty', () => {
+      expect(component.labelD).toEqual(label);
     });
-
-    describe('upon failure', () => {
-      it('should set that an error occurred', (done) => {
-        response = Observable.create((observer) => {
-          observer.error();
-        }).delay(1);
-        userServiceMock.getUsers.and.returnValue(response);
-        component.ionViewWillEnter();
-
-        response.subscribe(() => { }, () => {
-          expect(component.errorOccurred).toBe(true);
-          done();
-        });
-      });
+    it('should initialize the type to empty', () => {
+      expect(component.type).toEqual(type);
     });
   });
-*/
+
   describe('onSubmit', () => {
      let response: Observable<News>;
 

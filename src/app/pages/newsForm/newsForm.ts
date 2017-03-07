@@ -12,12 +12,11 @@ import { UserService, NewsService } from '../../services/services';
 })
 
 export class NewsForm {
-  //public users: User[] = [];
   public d: Date = new Date();
   public date = this.d.getFullYear() + "-" + ("0"+(this.d.getMonth()+1)).slice(-2) + "-" + ("0" + this.d.getDate()).slice(-2);
   public news: News;
-  public type: string = 'Medication';
-  public labelD: string = 'md-analytics';
+  public type: string = '';
+  public labelD: string = '';
   public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
 
@@ -25,21 +24,40 @@ export class NewsForm {
   public navCtrl: NavController, public _userService: UserService ) { 
     this.type =  params.data.type;
     this.news = new News (0, this.type, '', this.date, 1);
-    if (this.type != 'Medication') {
+ /*   if (this.type == 'SymptomCheck') {
       this.labelD = 'md-american-football';
-    } else {
+    } 
+    if (this.type == 'Medication') {
       this.labelD = 'md-analytics';
+    } 
+    if (this.type == 'Activity') {
+      this.labelD = 'md-paper-plane';
+    } 
+    if (this.type == 'FreeEntry') {
+      this.labelD = 'md-thermometer';
+    }
+*/
+    switch (this.type) {
+      case 'SymptomCheck' :
+        this.labelD = 'md-american-football';
+        break;
+      case 'Medication' :
+        this.labelD = 'md-analytics';
+        break;
+      case 'Activity' :
+        this.labelD = 'md-paper-plane';
+        break;
+      case 'FreeEntry' :
+        this.labelD = 'md-thermometer';
+        break;
+      default : this.labelD = 'md-alert';
     }
   }
 
   public onSubmit() {
     this.addNews(this.news);
   } 
-/*
-  ionViewWillEnter() {
-    this.getUsers();
-  }
-*/
+  
   private addNews(news): void {
     this._newsService
         .addNews(news)
@@ -58,17 +76,6 @@ export class NewsForm {
         .subscribe((data: News) => this.news = data,
            error => console.log(error),
            () => console.log('News updated'));
-  }
-
-  private getUsers(): void {
-    this._userService
-        .getUsers()
-        .subscribe((data: User[]) => this.users = data,
-            error =>{
-              this.errorOccurred = true;
-              console.log(error)
-           },
-           () => console.log('Get all Users complete'));
   }
 */
 

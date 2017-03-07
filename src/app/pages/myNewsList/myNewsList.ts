@@ -11,9 +11,8 @@ import { NewsDescription, NewsForm } from '../pages'
 
 export class MyNewsList  {
   public myNews: News[] = []; 
-  public type: string;
+  public type: string = '';
   public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
-
 
   constructor(public nav: NavController, private _newsService: NewsService, public act: ActionSheetController) { }
   
