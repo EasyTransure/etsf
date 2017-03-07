@@ -9,8 +9,14 @@ describe('User service', () => {
   beforeEach(() => {
     mockHttp = jasmine.createSpyObj('mockHttp', ['get', 'post', 'put', 'delete']);
     userService = new UserService (mockHttp);
-    user = new User (0, '', '', '', '');
+    user = new User ('0');
   });
+
+  describe('getCurrentUser', () => {
+    it('should return a mocked user', () => {
+      expect(userService.getCurrentUser().id_user).toBe('a123875114-bf258314');
+    });
+  })
 
   describe('getUsers', () => {
     it('should return all the users', () => {
@@ -24,7 +30,7 @@ describe('User service', () => {
   describe('getAUser', () => {
     it('should return the corresponding user', () => {
       mockHttp.get.and.returnValue(Observable.of());
-      userService.getAUser(1);
+      userService.getAUser('1');
 
       expect(mockHttp.get).toHaveBeenCalled();
     });

@@ -10,7 +10,7 @@ import { UserForm } from '../pages';
 })
 
 export class MyProfile {
-  public user: User = new User(1, '', '', '', '');
+  public user: User = new User('1');
   public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
   constructor(public nav: NavController, public params: NavParams, public _userService: UserService) { }
@@ -23,7 +23,7 @@ export class MyProfile {
     this.nav.push(UserForm, { user: user });
   }
 
-  public getUser(id_user: number): void {
+  public getUser(id_user: string): void {
     this._userService
       .getAUser(id_user)
       .subscribe((data: User) => this.user = data,

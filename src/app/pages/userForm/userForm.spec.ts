@@ -11,7 +11,7 @@ describe('Page: User Form', () => {
   let user: User;
 
   beforeEach(() => {
-    user = new User (1, '', '', '', '');
+    user = new User ('1');
     userServiceMock = jasmine.createSpyObj('userService', ['updateUser']);
     navController = jasmine.createSpyObj('navController', ['push']);
     navParams = { data : { user : user}, get: null};
@@ -35,7 +35,7 @@ describe('Page: User Form', () => {
       userServiceMock.updateUser.and.returnValue(response);
       component.onSubmit();
 
-      expect(userServiceMock.updateUser).toHaveBeenCalledWith(1, user);
+      expect(userServiceMock.updateUser).toHaveBeenCalledWith('1', user);
     });
 
     describe('upon successful response', () => {
@@ -47,7 +47,7 @@ describe('Page: User Form', () => {
 
       it('should add the news', (done) => {
         response.subscribe(() => {
-          expect(component.user.id_user).toBe(1);
+          expect(component.user.id_user).toBe('1');
           done();
         });
       });

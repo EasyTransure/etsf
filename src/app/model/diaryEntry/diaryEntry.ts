@@ -1,28 +1,28 @@
 import { Activity, FreeEntry, Medication, SymptomCheck } from '../_model';
 
 export class DiaryEntry {
-  public idNews: number;
+  public id: number;
   public type: string;
   public description: string;
   public date_red: string;
   public id_user: number;
-  public activity: Activity;
-  public freeEntry: FreeEntry;
-  public medication: Medication;
-  public symptomCheck: SymptomCheck;
-  
+  public activity?: Activity;
+  public freeEntry?: FreeEntry;
+  public medication?: Medication;
+  public symptomCheck?: SymptomCheck;
+
   constructor(
-    idNews: number,
+    id: number,
     type: string,
     description: string,
     date_red: string,
     id_user: number,
-    activity: Activity,
-    freeEntry: FreeEntry,
-    medication: Medication,
-    symptomCheck: SymptomCheck
+    activity?: Activity,
+    freeEntry?: FreeEntry,
+    medication?: Medication,
+    symptomCheck?: SymptomCheck
   ) {
-    this.idNews = idNews;
+    this.id = id;
     this.type = type;
     this.description = description;
     this.date_red = date_red;
@@ -32,5 +32,5 @@ export class DiaryEntry {
     this.medication = medication;
     this.symptomCheck = symptomCheck;
   }
-  
+
 }

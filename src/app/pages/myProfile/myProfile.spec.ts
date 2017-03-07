@@ -12,7 +12,7 @@ describe('Page: My Profile', () => {
   let user: User;
 
   beforeEach(() => {
-    user = new User(1, '', '', '', '');
+    user = new User('1');
     userServiceMock = jasmine.createSpyObj('userService', ['getAUser']);
     navController = jasmine.createSpyObj('navController', ['push']);
     component = new MyProfile(navController, navParams, userServiceMock);
@@ -47,7 +47,7 @@ describe('Page: My Profile', () => {
 
       it('should load the user', (done) => {
         response.subscribe(() => {
-          expect(component.user.id_user).toBe(1);
+          expect(component.user.id_user).toBe('1');
           done();
         });
       });

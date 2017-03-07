@@ -11,7 +11,7 @@ describe('Page: My News List', () => {
   let user: User;
 
   beforeEach(() => {
-    user = new User(1, '', '', '', '');
+    user = new User('1');
     component = new Login( alertController, navController );
   });
 

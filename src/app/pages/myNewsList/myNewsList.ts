@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController } from 'ionic-angular';
-import { News }       from '../../model/_model'; 
-import { NewsService } from '../../services/services';
+import { FirebaseListObservable } from 'angularfire2';
+import { DiaryEntry }       from '../../model/_model';
+import { DiaryService, UserService } from '../../services/services';
 import { NewsDescription, NewsForm } from '../pages'
 
 @Component({
@@ -10,12 +11,13 @@ import { NewsDescription, NewsForm } from '../pages'
 })
 
 export class MyNewsList  {
-  public myNews: News[] = []; 
+  public myDiaryEntries: FirebaseListObservable<DiaryEntry[]>;
   public type: string = '';
   public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
-  constructor(public nav: NavController, private _newsService: NewsService, public act: ActionSheetController) { }
-  
+  constructor(public nav: NavController, private diaryService: DiaryService, public act: ActionSheetController,
+    private userService: UserService) { }
+
   createANews() {
     let actionSheet = this.act.create({
       title: 'Type',
@@ -62,7 +64,6 @@ export class MyNewsList  {
         }
       ]
     });
-    
     actionSheet.present();
   }
 
@@ -71,26 +72,7 @@ export class MyNewsList  {
   }
 
   ionViewWillEnter() {
-    this.getMyNews(1);
-  }
-/*   
-  searchNews(ev) {
-    let val = ev.target.value;
-
-    if (val && val.trim() != '') {
-      console.log("I am searching...");
-    }
-  }
-*/   
-  public getMyNews(id_user: number): void {
-    this._newsService
-        .getMyNews(id_user)
-        .subscribe((data: News[]) => this.myNews = data,
-           error =>{
-              this.errorOccurred = true;
-              console.log(error)
-           },
-           () => console.log('Get all my News complete'));
+    this.myDiaryEntries = this.diaryService.getEntriesForUser(this.userService.getCurrentUser());
   }
 
 }
