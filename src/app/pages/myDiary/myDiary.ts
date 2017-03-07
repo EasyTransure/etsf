@@ -6,11 +6,11 @@ import { DiaryService, UserService } from '../../services/services';
 import { NewsDescription, NewsForm } from '../pages'
 
 @Component({
-  selector: 'page-myNewsList',
-  templateUrl: 'myNewsList.html'
+  selector: 'page-myDiary',
+  templateUrl: 'myDiary.html'
 })
 
-export class MyNewsList  {
+export class MyDiary  {
   public myDiaryEntries: FirebaseListObservable<DiaryEntry[]>;
   public type: string = '';
   public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
@@ -21,6 +21,7 @@ export class MyNewsList  {
   createANews() {
     let actionSheet = this.act.create({
       title: 'Type',
+      cssClass: 'page-myDiary',
       buttons: [
         {
           text: 'Medication',
@@ -31,10 +32,10 @@ export class MyNewsList  {
           }
         },
         {
-          text: 'Symptome Check',
+          text: 'Symptom Check',
           icon: 'md-american-football',
           handler: () => {
-            this.type = 'SymptomeCheck',
+            this.type = 'SymptomCheck',
             this.nav.push(NewsForm, { type: this.type });
           }
         },
@@ -67,8 +68,8 @@ export class MyNewsList  {
     actionSheet.present();
   }
 
-  goToDetails(newsInfo) {
-    this.nav.push(NewsDescription, { newsInfo: newsInfo });
+  goToDetails(entry) {
+    this.nav.push(NewsDescription, { entry: entry });
   }
 
   ionViewWillEnter() {

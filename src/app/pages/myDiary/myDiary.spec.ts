@@ -1,10 +1,10 @@
-import { MyNewsList } from './myNewsList';
+import { MyDiary } from './myDiary';
 //import { NewsForm, NewsDescription } from '../pages';
 import { NavController } from 'ionic-angular';
 import { User } from '../../model/_model';
 
 describe('Page: My News List', () => {
-  let component: MyNewsList;
+  let component: MyDiary;
   let navController: NavController;
   let actionSheetCtrl: any;
   let diaryServiceMock: any;
@@ -17,7 +17,7 @@ describe('Page: My News List', () => {
     diaryServiceMock.getEntriesForUser.and.returnValue(null);
     userService = jasmine.createSpyObj('userService', ['getCurrentUser']);
     userService.getCurrentUser.and.returnValue(new User('1'));
-    component = new MyNewsList(navController, diaryServiceMock, actionSheetCtrl, userService);
+    component = new MyDiary(navController, diaryServiceMock, actionSheetCtrl, userService);
   });
 
   describe('at initialization', () => {

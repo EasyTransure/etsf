@@ -1,7 +1,7 @@
 import { Activity, FreeEntry, Medication, SymptomCheck } from '../_model';
 
 export class DiaryEntry {
-  public id: number;
+  public id: string;
   public type: string;
   public description: string;
   public creationDate: string;
@@ -12,7 +12,7 @@ export class DiaryEntry {
   public symptomCheck?: SymptomCheck;
 
   constructor(
-    id: number,
+    id: string,
     type: string,
     description: string,
     creationDate: string,

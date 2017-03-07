@@ -1,0 +1,45 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>Journal de Bord</ion-title>
+	</ion-navbar>
+	<ion-searchbar (ionInput)="searchNews($event)"></ion-searchbar>
+</ion-header>
+
+<ion-content>
+	<ion-fab bottom right>
+		<button ion-fab (click)="createANews()" color="secondary" mini><ion-icon name="add"></ion-icon></button>
+	</ion-fab>
+	<div *ngFor="let entry of myDiaryEntries | async" (click)="goToDetails(entry)" icon-left>
+		<ion-card>
+			<ion-card-content>
+				<div *ngIf="entry.type == 'SymptomCheck'">
+					<a ion-item>
+						<ion-icon name="md-american-football" style="color: #508AE4"></ion-icon>
+						{{ entry.description }} <br>
+					</a>
+				</div>
+				<div *ngIf="entry.type == 'Medication'">
+					<a ion-item>
+						<ion-icon name="md-analytics" style="color: #ED4248"></ion-icon>
+						{{ entry.description }} <br>
+					</a>
+				</div>
+				<div *ngIf="entry.type == 'Activity'">
+					<a ion-item>
+						<ion-icon name="md-paper-plane" style="color: #ED4248"></ion-icon>
+						{{ entry.description }} <br>
+					</a>
+				</div>
+				<div *ngIf="entry.type == 'FreeEntry'">
+					<a ion-item>
+						<ion-icon name="md-thermometer" style="color: #31D55F"></ion-icon>
+						{{ entry.description }} <br>
+					</a>
+				</div>
+			</ion-card-content>
+		</ion-card>
+	</div>
+</ion-content>

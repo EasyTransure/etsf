@@ -9,16 +9,13 @@
 <ion-content>
   <ion-card>
       <ion-card-header>
-        <h2>{{ newsInfo.type}}</h2>
+        <h2>{{ entry.type}}</h2>
       </ion-card-header>
       <ion-card-content>
-        {{ newsInfo.description }}
+        {{ entry.description }}
       </ion-card-content>
       <ion-card-content>
-        <p> By : {{ newsInfo.Name }} on the {{ newsInfo.date_red }} </p>
+        <p> By : {{ entry.uid }} on the {{ entry.creationDate }} </p>
       </ion-card-content>
   </ion-card>
-  <ion-fab bottom right >
-		<button ion-fab (click)="followPerson(1)" color="secondary" mini><ion-icon name="md-people"></ion-icon></button>
-	</ion-fab>
 </ion-content>

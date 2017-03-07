@@ -14,19 +14,18 @@
 				<ion-label floating>Description <ion-icon [name] ="labelD"></ion-icon></ion-label>
 				<ion-input type="text" [(ngModel)]="news.description" [ngModelOptions]="{standalone: true}" ></ion-input>
 			</ion-item>
-	  <!--
-			<ion-item>
-				<ion-label floating>Date</ion-label>
-				<ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="news.date_red" [ngModelOptions]="{standalone: true}"></ion-datetime>
-			</ion-item>
-	  
-			<ion-item>
-				<ion-label floating>Utilisateur</ion-label>
-        <ion-select id="user" class="form-control" [(ngModel)]="news.id_user" [ngModelOptions]="{standalone: true}">
-          <ion-option *ngFor="let user of users" [value]="user.id_user">{{ user.name }}</ion-option>
-        </ion-select>
-			</ion-item>
-	  -->
+			<div *ngIf="news.type == 'SymptomCheck'">
+				
+			</div>
+			<div *ngIf="news.type == 'Activity'">
+				
+			</div>
+			<div *ngIf="news.type == 'FreeEntry'">
+				
+			</div>
+			<div *ngIf="news.type == 'Medication'">
+				
+			</div>
 			<ion-item>
 				<button ion-button block type="submit">Valider</button>
 			</ion-item>

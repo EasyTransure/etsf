@@ -3,7 +3,7 @@ export * from './login/login';
 export * from './newsDescription/newsDescription';
 export * from './newsForm/newsForm';
 export * from './newsList/newsList';
-export * from './myNewsList/myNewsList';
+export * from './myDiary/myDiary';
 export * from './userForm/userForm';
 export * from './tabs/tabs';
 export * from './myProfile/myProfile';

@@ -1,6 +1,5 @@
-//import { Component } from '@angular/core';
 import { Tabs } from './tabs';
-import { MyNewsList } from '../pages';
+import { MyDiary } from '../pages';
 
 
 describe('Page: Tabs', () => {
@@ -15,7 +14,7 @@ describe('Page: Tabs', () => {
       expect(component.infoRoot).toEqual("");
     });
     it('should initialize the third tab to My profile', () => {
-      expect(component.journalRoot).toEqual(MyNewsList);
+      expect(component.journalRoot).toEqual(MyDiary);
     });
     it('should initialize the nomber of general news to 0', () => {
       expect(component.tabCount1).toEqual(0);
