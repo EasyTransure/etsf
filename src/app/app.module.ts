@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Home, NewsForm, UserForm, NewsDescription, MyNewsList, Tabs, MyProfile } from './pages/pages';
-import { DiaryService, UserService, NewsService } from './services/services';
+import { DiaryService, ReferentialService, UserService, NewsService } from './services/services';
 import { AngularFireModule } from 'angularfire2';
 
 export const firebaseConfig = {
@@ -39,6 +39,6 @@ export const firebaseConfig = {
     Tabs,
     MyProfile
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DiaryService, UserService, NewsService]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DiaryService, ReferentialService, UserService, NewsService]
 })
 export class AppModule { }
