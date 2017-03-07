@@ -1,4 +1,4 @@
-export class RefSymptom {
+export class RefActivity {
   public id: string;
   public name: string;
 
