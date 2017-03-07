@@ -1,29 +1,36 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+	<ion-navbar>
+		<button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Journal de Bord</ion-title>
-  </ion-navbar>
+		<ion-title>Journal de Bord</ion-title>
+	</ion-navbar>
 </ion-header>
 
 <ion-content>
-	<ion-fab bottom right >
+	<ion-fab bottom right>
 		<button ion-fab (click)="createANews()" color="secondary" mini><ion-icon name="add"></ion-icon></button>
 	</ion-fab>
 	<ion-searchbar (ionInput)="searchNews($event)"></ion-searchbar>
-	<div *ngFor = "let newsInfo of myNews">
+	<div *ngFor="let newsInfo of myNews">
 		<ion-card>
-			<ion-card-header>
-			<ion-item>
-				<a ion-item (click)="goToDetails(newsInfo)">
-						{{ newsInfo.title }}
-						<ion-badge item-right>260k</ion-badge>
-				</a>
-			</ion-item>
-			</ion-card-header>
 			<ion-card-content>
-					<p>	By : {{ newsInfo.Name }} on the {{ newsInfo.date_red }}</p>
+				<div *ngIf="newsInfo.type == 'SymptomeCheck'">
+					<ion-icon name="md-american-football"></ion-icon>
+				</div>
+				<div *ngIf="newsInfo.type == 'Medication'">
+					<ion-icon name="md-analytics"></ion-icon>
+				</div>
+				<div *ngIf="newsInfo.type == 'Activity'">
+					<ion-icon name="md-paper-plane"></ion-icon>
+				</div>
+				<div *ngIf="newsInfo.type == 'FreeEntry'">
+					<ion-icon name="md-thermometer"></ion-icon>
+				</div>
+				<a ion-item (click)="goToDetails(newsInfo)">	
+					{{ newsInfo.description }} <br>
+					<p>	{{ newsInfo.date_red }}</p>
+				</a>
 			</ion-card-content>
 		</ion-card>
 	</div>

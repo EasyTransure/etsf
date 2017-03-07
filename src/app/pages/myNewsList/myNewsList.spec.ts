@@ -1,4 +1,4 @@
-import { MyNewsList } from './myNewsList';
+/*import { MyNewsList } from './myNewsList';
 import { NewsForm, NewsDescription } from '../pages';
 import { NavController } from 'ionic-angular';
 import { News } from '../../model/_model';
@@ -83,3 +83,4 @@ describe('Page: My News List', () => {
     });
   });
 });
+*/

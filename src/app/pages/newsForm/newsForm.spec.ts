@@ -1,33 +1,37 @@
 import { NewsForm } from './newsForm';
-import { NavController, AlertController } from 'ionic-angular';
-import { User, News } from '../../model/_model';
+import { NavController, AlertController, NavParams } from 'ionic-angular';
+import { //User,
+   News } from '../../model/_model';
 import { Observable } from 'rxjs/Observable';
 
 describe('Page: News Form', () => {
   let component: NewsForm;
   let navController: NavController;
   let altController: AlertController;
+  let params: NavParams;
   let userServiceMock: any;
   let newsServiceMock: any;
   let news: News;
   let d: Date = new Date();
   let date: string;
+  let type: string = 'Medication';
 
   beforeEach(() => {
     userServiceMock = jasmine.createSpyObj('userService', ['getUsers']);
     newsServiceMock = jasmine.createSpyObj('newsService', ['addNews']);
     navController = jasmine.createSpyObj('navController', ['push']);
     altController = jasmine.createSpyObj('altController', ['present']);
+    params = { data: { type: type }, get: null };
     date = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
   
     news = new News (0, '', '', date, 1);
-    component = new NewsForm(altController, newsServiceMock, navController, userServiceMock);
+    component = new NewsForm(params, altController, newsServiceMock, navController, userServiceMock);
   });
 
-  describe('at initialization', () => {
+  describe('at initialization', () => {/*
     it('should initialize the users as an empty array', () => {
       expect(component.users).toEqual([]);
-    });
+    });*/
     it('should initialize the error indicator to false', () => {
       expect(component.errorOccurred).toBe(false);
     });
@@ -35,7 +39,7 @@ describe('Page: News Form', () => {
       expect(component.date).toBe(date);
     })
   });
-
+/*
   describe('ionViewWillEnter', () => {
     let response: Observable<User[]>;
 
@@ -78,7 +82,7 @@ describe('Page: News Form', () => {
       });
     });
   });
-
+*/
   describe('onSubmit', () => {
      let response: Observable<News>;
 

@@ -2,7 +2,6 @@
 import { Login } from './login';
 import { User } from '../../model/_model';
 import { NavController, AlertController } from 'ionic-angular';
-import { NewsList, MyNewsList, MyProfile } from '../pages';
 
 
 describe('Page: My News List', () => {
