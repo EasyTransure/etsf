@@ -8,8 +8,7 @@ describe('DiaryServiceService', () => {
   let afMock;
 
   beforeEach(() => {
-    afMock = jasmine.createSpyObj('mockaf', ['list']);
-    afMock.list.and.returnValue(null);
+    afMock = jasmine.createSpyObj('afMock', ['list']);
     let afDatabase = {
       database: afMock
     }
@@ -23,7 +22,7 @@ describe('DiaryServiceService', () => {
     expect(service).toBeTruthy();
   }));
 
-  describe('function getNews', () => {
+  describe('function getEntriesForUser', () => {
     it('should return an observable', inject([DiaryService], (service: DiaryService) => {
       let user = new User('1');
       service.getEntriesForUser(user);
