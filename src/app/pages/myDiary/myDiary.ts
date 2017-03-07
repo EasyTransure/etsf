@@ -3,7 +3,7 @@ import { NavController, ActionSheetController } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2';
 import { DiaryEntry }       from '../../model/_model';
 import { DiaryService, UserService } from '../../services/services';
-import { NewsDescription, NewsForm } from '../pages'
+import { DiaryDescription, NewsForm } from '../pages'
 
 @Component({
   selector: 'page-myDiary',
@@ -69,7 +69,7 @@ export class MyDiary  {
   }
 
   goToDetails(entry) {
-    this.nav.push(NewsDescription, { entry: entry });
+    this.nav.push(DiaryDescription, { entry: entry });
   }
 
   ionViewWillEnter() {

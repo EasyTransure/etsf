@@ -3,11 +3,11 @@ import { NavParams } from 'ionic-angular';
 import { DiaryEntry } from '../../model/_model';
 
 @Component({
-  selector: 'page-newsDescription',
-  templateUrl: 'newsDescription.html'
+  selector: 'page-diaryDescription',
+  templateUrl: 'diaryDescription.html'
 })
 
-export class NewsDescription {
+export class DiaryDescription {
   public entry: DiaryEntry = new DiaryEntry('', '', '', '', '');
   public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 

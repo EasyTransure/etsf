@@ -1,16 +1,16 @@
-import { NewsDescription } from './newsDescription';
+import { DiaryDescription } from './diaryDescription';
 import { NavParams } from 'ionic-angular';
 import { DiaryEntry } from '../../model/_model';
 
 describe('Page: Diary Description', () => {
-  let component: NewsDescription;
+  let component: DiaryDescription;
   let navParams: NavParams;
   let entry: DiaryEntry;
 
   beforeEach(() => {
     entry = new DiaryEntry('', '', '', '', '');
     navParams = { data: { entry: entry }, get: null };
-    component = new NewsDescription(navParams);
+    component = new DiaryDescription(navParams);
   });
 
   describe('at initialization', () => {

@@ -53,8 +53,8 @@ describe('Page: My News List', () => {
   /*describe('goToDetails', () => {
     it('should go to the news description screen, passing in the news', () => {
       let news = new News(1, 't', 'd', 'date', 1);
-      component.goToDetails(news);
-      expect(navController.push).toHaveBeenCalledWith(NewsDescription, { newsInfo: news });
+      component.goToDetails(entry);
+      expect(navController.push).toHaveBeenCalledWith(DiaryDescription, { entry: entry });
     });
   });*/
 });
