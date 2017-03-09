@@ -17,8 +17,13 @@ export class DiaryService {
   }
 
   public addNewEntry(user: User, entry: DiaryEntry): void {
-    console.log('addnewentry', this.entriesForUser);
-    this.entriesForUser.push(entry);
+    /*console.log('addnewentry');
+    console.log(entry);*/
+    this.entriesForUser.push(entry).then((item) => {
+      let key = item.key;
+      entry.id = key;
+      this.entriesForUser.update(key, entry);
+    });
   }
 
   private initEntriesForUser(uid: string): void{

@@ -27,10 +27,10 @@ export class DiaryEntry {
     this.description = description;
     this.creationDate = creationDate;
     this.uid = uid;
-    this.activity = activity;
-    this.freeEntry = freeEntry;
-    this.medication = medication;
-    this.symptomCheck = symptomCheck;
+    this.activity = activity ? activity : null;
+    this.freeEntry = freeEntry ? freeEntry : null;
+    this.medication = medication ? medication : null;
+    this.symptomCheck = symptomCheck ? symptomCheck: null;
   }
 
 }
