@@ -8,34 +8,48 @@
 	<form (ngSubmit)="onSubmit()">
 		<ion-list no-lines>
 			<div *ngIf="entry.type == 'SymptomCheck'">
-				<!--
 				<ion-item>
 					<ion-label floating>I feel...</ion-label>
-					<ion-range min="1" max='5' step="1" snaps="true" pin="true" [(ngModel)]="entry.symptomCheck.rating">
+					<ion-range min="1" max='5' step="1" snaps="true" pin="true" [(ngModel)]="entry.symptomCheck.rating" [ngModelOptions]="{standalone: true}">
 						<ion-label range-left>1</ion-label>
 						<ion-label range-right>5</ion-label>
 					</ion-range>
-				</ion-item>-->
+				</ion-item>
 				<ion-item>
 					<ion-label floating>Description</ion-label>
 					<ion-input type="text" [(ngModel)]="entry.description" [ngModelOptions]="{standalone: true}"></ion-input>
 				</ion-item>
-				<ion-item>
-					<ion-label floating>Symptoms</ion-label>
-					<button color="light"><ion-icon name="add"></ion-icon></button>
-				</ion-item>
+					<ion-item-divider color="light" icon-right>
+						Symptoms <ion-icon name="add-circle" (click)="addSymtom(symptom)" item-right></ion-icon>
+					</ion-item-divider>
+					<ion-item *ngFor="let symptom of entry.symptomCheck.symptoms">
+						{{ symptom.name }}
+						<ion-icon name="remove-circle" item-right></ion-icon>
+					</ion-item>
 			</div>
 			<div *ngIf="entry.type == 'Activity'">
-				<!--<ion-card>
+				<ion-card>
 					<ion-card-content icon-right>
-						{{ activity }}
+						{{ entry.activity.activityType.name }}
 					</ion-card-content>
-				</ion-card>-->
+				</ion-card>
 				<ion-item>
 					<ion-label floating>Description
 						<ion-icon [name]="labelD"></ion-icon>
 					</ion-label>
 					<ion-input type="text" [(ngModel)]="entry.description" [ngModelOptions]="{standalone: true}"></ion-input>
+				</ion-item>
+				<ion-item>
+					<ion-label floating>Date</ion-label>
+					<ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="entry.activity.dateActivity" [ngModelOptions]="{standalone: true}"></ion-datetime>
+				</ion-item>
+				<ion-item>
+					<ion-label floating>Start Time</ion-label>
+					<ion-datetime displayFormat="h: mm A" pickerFormat="h mm A" [(ngModel)]="entry.activity.dateActivity" [ngModelOptions]="{standalone: true}"></ion-datetime>
+				</ion-item>
+				<ion-item>
+					<ion-label floating>Duration</ion-label>
+					<ion-input type="text" [(ngModel)]="entry.activity.duration" [ngModelOptions]="{standalone: true}"></ion-input>
 				</ion-item>
 			</div>
 			<div *ngIf="entry.type == 'FreeEntry'">

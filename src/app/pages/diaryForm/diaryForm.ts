@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
-import { DiaryEntry
-  //, SymptomCheck, Medication, Activity, FreeEntry 
-} from '../../model/_model';
+import { DiaryEntry, SymptomCheck, Medication, Activity, FreeEntry, RefActivity } from '../../model/_model';
 import { UserService, DiaryService } from '../../services/services';
-
 
 @Component({
   selector: 'page-diaryForm',
@@ -15,10 +12,6 @@ export class DiaryForm {
   public d: Date = new Date();
   public date: string = this.d.getTime().toString();
   public entry: DiaryEntry;
-  /*public activity: Activity = null;
-  public freeEntry: FreeEntry = null;
-  public medication: Medication = null;
-  public symptomCheck: SymptomCheck = null;*/
   public type: string = '';
   public labelD: string = '';
   public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
@@ -29,20 +22,24 @@ export class DiaryForm {
     this.entry = new DiaryEntry('', this.type, '', this.date, 'a123875114-bf258314');
     if (this.type == 'SymptomCheck') {
       this.labelD = 'md-american-football';
-     // this.entry = new DiaryEntry('', this.type, '', this.date, 'a123875114-bf258314');
-      //this.entry.symptomCheck.rating = 3;
+      let symptomCheck: SymptomCheck = new SymptomCheck(3, null);
+      this.entry.symptomCheck = symptomCheck;
     }
     if (this.type == 'Medication') {
       this.labelD = 'md-analytics';
-      //this.entry = new DiaryEntry('', this.type, '', this.date, 'a123875114-bf258314');
+      let medication: Medication = new Medication();
+      this.entry.medication = medication;
     }
     if (this.type == 'Activity') {
       this.labelD = 'md-paper-plane';
-      //this.entry = new DiaryEntry('', this.type, '', this.date, 'a123875114-bf258314');
+      let activ: RefActivity = params.data.activity;
+      let activity: Activity = new Activity(activ, '', '', 0);
+      this.entry.activity = activity;
     }
     if (this.type == 'FreeEntry') {
       this.labelD = 'md-thermometer';
-      //this.entry = new DiaryEntry('', this.type, '', this.date, 'a123875114-bf258314');
+      let freeEntry: FreeEntry = new FreeEntry();
+      this.entry.freeEntry = freeEntry;
     }
   }
 
