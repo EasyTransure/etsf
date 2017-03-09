@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController } from 'ionic-angular';
-import { FirebaseListObservable } from 'angularfire2';
-import { DiaryEntry }       from '../../model/_model';
+import { DiaryEntry } from '../../model/_model';
 import { DiaryService, UserService } from '../../services/services';
 import { DiaryDescription, DiaryForm, ActivityList } from '../pages'
 
@@ -10,8 +9,8 @@ import { DiaryDescription, DiaryForm, ActivityList } from '../pages'
   templateUrl: 'myDiary.html'
 })
 
-export class MyDiary  {
-  public myDiaryEntries: FirebaseListObservable<DiaryEntry[]>;
+export class MyDiary {
+  public myDiaryEntries: DiaryEntry[] = [];
   public type: string = '';
   public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
@@ -28,7 +27,7 @@ export class MyDiary  {
           icon: 'analytics',
           handler: () => {
             this.type = 'Medication',
-            this.nav.push(DiaryForm, { type: this.type });
+              this.nav.push(DiaryForm, { type: this.type });
           }
         },
         {
@@ -36,7 +35,7 @@ export class MyDiary  {
           icon: 'american-football',
           handler: () => {
             this.type = 'SymptomCheck',
-            this.nav.push(DiaryForm, { type: this.type });
+              this.nav.push(DiaryForm, { type: this.type });
           }
         },
         {
@@ -44,7 +43,7 @@ export class MyDiary  {
           icon: 'paper-plane',
           handler: () => {
             this.type = 'Activity',
-            this.nav.push(ActivityList, { type: this.type });
+              this.nav.push(ActivityList, { type: this.type });
           }
         },
         {
@@ -52,7 +51,7 @@ export class MyDiary  {
           icon: 'thermometer',
           handler: () => {
             this.type = 'FreeEntry',
-            this.nav.push(DiaryForm, { type: this.type });
+              this.nav.push(DiaryForm, { type: this.type });
           }
         },
         {
@@ -72,7 +71,9 @@ export class MyDiary  {
   }
 
   ionViewWillEnter() {
-    this.myDiaryEntries = this.diaryService.getEntriesForUser(this.userService.getCurrentUser());
+    this.diaryService.getEntriesForUser(this.userService.getCurrentUser()).subscribe((entries) => {
+      this.myDiaryEntries = entries.reverse();
+    });
   }
 
 }
