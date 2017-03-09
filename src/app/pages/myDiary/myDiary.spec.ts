@@ -44,7 +44,7 @@ describe('Page: My News List', () => {
     it('should redirect to news creation page', () => {
       let present = jasmine.createSpy("present");
       actionSheetCtrl.create.and.returnValue({"test":true, "present": present });
-      component.createANews();
+      component.createDiary();
       expect(actionSheetCtrl.create).toHaveBeenCalled();
       expect(present).toHaveBeenCalled();
     });

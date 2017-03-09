@@ -3,7 +3,7 @@ import { NavController, ActionSheetController } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2';
 import { DiaryEntry }       from '../../model/_model';
 import { DiaryService, UserService } from '../../services/services';
-import { DiaryDescription, NewsForm } from '../pages'
+import { DiaryDescription, DiaryForm, ActivityList } from '../pages'
 
 @Component({
   selector: 'page-myDiary',
@@ -18,41 +18,41 @@ export class MyDiary  {
   constructor(public nav: NavController, private diaryService: DiaryService, public act: ActionSheetController,
     private userService: UserService) { }
 
-  createANews() {
+  createDiary() {
     let actionSheet = this.act.create({
       title: 'Type',
       cssClass: 'page-myDiary',
       buttons: [
         {
           text: 'Medication',
-          icon: 'md-analytics',
+          icon: 'analytics',
           handler: () => {
             this.type = 'Medication',
-            this.nav.push(NewsForm, { type: this.type });
+            this.nav.push(DiaryForm, { type: this.type });
           }
         },
         {
           text: 'Symptom Check',
-          icon: 'md-american-football',
+          icon: 'american-football',
           handler: () => {
             this.type = 'SymptomCheck',
-            this.nav.push(NewsForm, { type: this.type });
+            this.nav.push(DiaryForm, { type: this.type });
           }
         },
         {
           text: 'Activity',
-          icon: 'md-paper-plane',
+          icon: 'paper-plane',
           handler: () => {
             this.type = 'Activity',
-            this.nav.push(NewsForm, { type: this.type });
+            this.nav.push(ActivityList, { type: this.type });
           }
         },
         {
           text: 'Free Entry',
-          icon: 'md-thermometer',
+          icon: 'thermometer',
           handler: () => {
             this.type = 'FreeEntry',
-            this.nav.push(NewsForm, { type: this.type });
+            this.nav.push(DiaryForm, { type: this.type });
           }
         },
         {
@@ -60,7 +60,6 @@ export class MyDiary  {
           role: 'cancel', // will always sort to be on the bottom
           icon: 'close',
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]

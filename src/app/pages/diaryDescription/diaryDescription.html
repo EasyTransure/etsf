@@ -6,16 +6,42 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
-      <ion-card-header>
-        <h2>{{ entry.type}}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        {{ entry.description }}
+<ion-content padding>
+
+  <div *ngIf="entry.type == 'SymptomCheck'">
+    <ion-range min="1" max='5' step="1" snaps="true" pin="true" [(ngModel)]="entry.symptomCheck.rating" disabled>
+      <ion-label range-left class="small-text">1</ion-label>
+      <ion-label range-right>5</ion-label>
+    </ion-range>
+    <ion-card>
+      <ion-card-content icon-right>
+        <ion-icon name="american-football" style="color: #508AE4"></ion-icon>
+        {{ entry.description }} <br><br> By : {{ entry.uid }} on the {{ entry.creationDate }}
       </ion-card-content>
-      <ion-card-content>
-        <p> By : {{ entry.uid }} on the {{ entry.creationDate }} </p>
-      </ion-card-content>
-  </ion-card>
+    </ion-card>
+
+    <ion-list>
+      <ion-list-header>
+        My symptoms
+      </ion-list-header>
+      <ion-item *ngFor="let symptom of entry.symptomCheck.symptoms">
+        {{symptom.name}}
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="entry.type == 'Activity'">
+
+  </div>
+
+  <div *ngIf="entry.type == 'FreeEntry'">
+    <ion-icon name="thermometer" style="color: #31D55F"></ion-icon>
+    {{ entry.description }} <br> <br> By : {{ entry.uid }} on the {{ entry.creationDate }}
+  </div>
+
+  <div *ngIf="entry.type == 'Medication'">
+    <ion-icon name="analytics" style="color: #ED4248"></ion-icon>
+    {{ entry.description }} <br><br> By : {{ entry.uid }} on the {{ entry.creationDate }}
+  </div>
+
 </ion-content>

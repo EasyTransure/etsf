@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>Activities</ion-title>
+    </ion-navbar>
+    <ion-searchbar (ionInput)="searchActivities($event)"  ></ion-searchbar>
+</ion-header>
+
+<ion-content>
+    <!--
+    <ion-fab bottom right>
+        <button ion-fab (click)="createActivity()" color="secondary" mini><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+    -->
+    <ion-list>
+        <a ion-item *ngFor="let activity of activities " (click)="chooseActivity(activity)">
+            {{ activity.name }}
+        </a>
+    </ion-list>
+</ion-content>
