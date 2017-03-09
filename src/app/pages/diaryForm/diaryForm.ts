@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { DiaryEntry
-  //, SymptomCheck, Medication, Activity, FreeEntry 
+  //, SymptomCheck, Medication, Activity, FreeEntry
 } from '../../model/_model';
 import { UserService, DiaryService } from '../../services/services';
 
@@ -12,8 +12,6 @@ import { UserService, DiaryService } from '../../services/services';
 })
 
 export class DiaryForm {
-  public d: Date = new Date();
-  public date: string = this.d.getTime().toString();
   public entry: DiaryEntry;
   /*public activity: Activity = null;
   public freeEntry: FreeEntry = null;
@@ -26,7 +24,7 @@ export class DiaryForm {
   constructor(public params: NavParams, public alertCtrl: AlertController, private diaryService: DiaryService,
     public navCtrl: NavController, public userService: UserService) {
     this.type = params.data.type;
-    this.entry = new DiaryEntry('', this.type, '', this.date, 'a123875114-bf258314');
+    this.entry = new DiaryEntry('', this.type, '', (new Date()).getTime().toString(), 'a123875114-bf258314');
     if (this.type == 'SymptomCheck') {
       this.labelD = 'md-american-football';
      // this.entry = new DiaryEntry('', this.type, '', this.date, 'a123875114-bf258314');
