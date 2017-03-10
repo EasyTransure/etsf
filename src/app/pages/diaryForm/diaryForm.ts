@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
-import { DiaryEntry, SymptomCheck, Medication, Activity, FreeEntry, RefActivity } from '../../model/_model';
+import { DiaryEntry, SymptomCheck, Medication, Activity, FreeEntry, RefActivity, CheckedSymptom, RefSymptom } from '../../model/_model';
 import { UserService, DiaryService } from '../../services/services';
+import { SymptomList } from '../pages';
 
 @Component({
   selector: 'page-diaryForm',
@@ -12,6 +13,7 @@ export class DiaryForm {
   public entry: DiaryEntry;
   public type: string = '';
   public labelD: string = '';
+  public symptoms: CheckedSymptom[] = [];
   public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
   constructor(public params: NavParams, public alertCtrl: AlertController, private diaryService: DiaryService,
@@ -20,8 +22,9 @@ export class DiaryForm {
     this.entry = new DiaryEntry('', this.type, '', (new Date()).getTime().toString(), 'a123875114-bf258314');
     if (this.type == 'SymptomCheck') {
       this.labelD = 'md-american-football';
-      let symptomCheck: SymptomCheck = new SymptomCheck(3, null);
+      let symptomCheck: SymptomCheck = new SymptomCheck(3);
       this.entry.symptomCheck = symptomCheck;
+      this.symptoms = this.convertArrayType(this.entry.symptomCheck.symptoms);
     }
     if (this.type == 'Medication') {
       this.labelD = 'md-analytics';
@@ -42,7 +45,33 @@ export class DiaryForm {
   }
 
   public onSubmit() {
+    if (this.type == 'SymptomCheck') {
+      this.entry.symptomCheck.symptoms = this.reconvertArrayType(this.symptoms);
+    }
     this.diaryService.addNewEntry(this.userService.getCurrentUser(), this.entry);
+    this.navCtrl.popToRoot();
+  }
+
+  public chooseSymptoms() {
+    this.navCtrl.push(SymptomList, { symptoms: this.symptoms });
+  }
+
+  public convertArrayType(unchecked: RefSymptom[]): CheckedSymptom[] {
+    let checked: CheckedSymptom[] = [];
+    unchecked.forEach((element) =>
+      checked.push(new CheckedSymptom(element.id, element.name))
+    );
+    return checked;
+  }
+
+  public reconvertArrayType(checked: CheckedSymptom[]): RefSymptom[] {
+    let unchecked: RefSymptom[] = [];
+    checked.forEach((element) => {
+      if (element.checked === true) {
+        unchecked.push(new RefSymptom(element.id, element.name));
+      }
+    });
+    return unchecked;
   }
 
 }

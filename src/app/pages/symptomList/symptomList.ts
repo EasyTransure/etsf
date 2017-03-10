@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-//import { NavController, ActionSheetController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2';
-import { RefSymptom } from '../../model/_model';
+import { RefSymptom, CheckedSymptom } from '../../model/_model';
 import { ReferentialService } from '../../services/services';
-//import { NewsForm } from '../pages'
+import { DiaryForm } from '../pages'
 
 @Component({
     selector: 'page-symptomList',
@@ -11,34 +11,42 @@ import { ReferentialService } from '../../services/services';
 })
 
 export class SymptomList {
-    public symptoms: RefSymptom[];
+    public symptoms: CheckedSymptom[];
     public temp: FirebaseListObservable<RefSymptom[]>;
-    public mySymptoms: RefSymptom[];
-    public symptom: RefSymptom;
     public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
-    constructor(private refService: ReferentialService) { }
+    constructor(private refService: ReferentialService, private nav: NavController, private params: NavParams) { }
 
     ionViewWillEnter() {
+        this.symptoms = this.params.data.symptoms;
         this.temp = this.refService.getSymptoms();
-        this.initializeSymptoms()
+        this.initializeSymptoms();
     }
     /*
         createASymptom() { }
     */
-    public addSymptom({symptom: symptom}) {
-        if (this.mySymptoms.find(symptom) == undefined) {
-            this.mySymptoms.push(symptom);
-        } else { ; }
+    public selectSymptom(symptom) {
+        this.symptoms.filter((data) => {
+            if (data.id === symptom.id) {
+                data.checked = !data.checked;
+            }
+        });
+    }
+
+    public onSubmit() {
+        this.nav.popTo(DiaryForm, { symptoms: this.symptoms });
     }
 
     public initializeSymptoms() {
-        this.symptoms = [];
-        this.temp.subscribe(array => {
-            array.forEach(symptom => {
-                this.symptoms.push(symptom);
+        if (this.symptoms.length === 0) {
+            this.temp.subscribe(array => {
+                array.forEach(symptom => {
+                    this.symptoms.push(this.convertType(symptom));
+                });
             });
-        });
+        } else {
+
+        }
     }
 
     public searchSymptoms(event) {
@@ -50,5 +58,9 @@ export class SymptomList {
                 return (symptom.name.toLowerCase().indexOf(val) > -1);
             });
         }
+    }
+
+    public convertType(unchecked: RefSymptom): CheckedSymptom {
+        return (new CheckedSymptom(unchecked.id, unchecked.name));
     }
 }
