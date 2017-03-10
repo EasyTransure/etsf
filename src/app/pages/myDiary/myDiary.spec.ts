@@ -1,9 +1,8 @@
 import { MyDiary } from './myDiary';
-//import { NewsForm, NewsDescription } from '../pages';
 import { NavController } from 'ionic-angular';
-import { User } from '../../model/_model';
+import { User, DiaryEntry } from '../../model/_model';
 
-describe('Page: My News List', () => {
+describe('Page: My Diary List', () => {
   let component: MyDiary;
   let navController: NavController;
   let actionSheetCtrl: any;
@@ -21,7 +20,7 @@ describe('Page: My News List', () => {
   });
 
   describe('at initialization', () => {
-    it('should initialize the news as an empty array', () => {
+    it('should initialize the diary as an empty array', () => {
       expect(component.myDiaryEntries).toBe(undefined);
     });
     it('should initialize the type to empty', () => {
@@ -40,8 +39,8 @@ describe('Page: My News List', () => {
     });
   });
 
-  describe('createANews', () => {
-    it('should redirect to news creation page', () => {
+  describe('createDiary', () => {
+    it('should redirect to diary creation page', () => {
       let present = jasmine.createSpy("present");
       actionSheetCtrl.create.and.returnValue({"test":true, "present": present });
       component.createDiary();
@@ -50,11 +49,11 @@ describe('Page: My News List', () => {
     });
   });
 
-  /*describe('goToDetails', () => {
-    it('should go to the news description screen, passing in the news', () => {
-      let news = new News(1, 't', 'd', 'date', 1);
+  describe('goToDetails', () => {
+    it('should go to the diary description screen', () => {
+      let entry = new DiaryEntry('', '', '', '', '');
       component.goToDetails(entry);
-      expect(navController.push).toHaveBeenCalledWith(DiaryDescription, { entry: entry });
+      expect(navController.push).toHaveBeenCalled();
     });
-  });*/
+  });
 });

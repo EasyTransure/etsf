@@ -19,13 +19,15 @@
 					<ion-label floating>Description</ion-label>
 					<ion-input type="text" [(ngModel)]="entry.description" [ngModelOptions]="{standalone: true}"></ion-input>
 				</ion-item>
-					<ion-item-divider color="light" icon-right>
-						Symptoms <ion-icon name="add-circle" (click)="addSymtom(symptom)" item-right></ion-icon>
-					</ion-item-divider>
-					<ion-item *ngFor="let symptom of entry.symptomCheck.symptoms">
-						{{ symptom.name }}
-						<ion-icon name="remove-circle" item-right></ion-icon>
-					</ion-item>
+				<ion-item-divider color="light" icon-right>
+					Symptoms
+					<a (click)="chooseSymptoms()" item-right>
+						<ion-icon name="add-circle"></ion-icon>
+					</a>
+				</ion-item-divider>
+				<ion-item *ngFor="let symptom of ( symptoms | symptomPipe )">
+					{{ symptom.name }}
+				</ion-item>
 			</div>
 			<div *ngIf="entry.type == 'Activity'">
 				<ion-card>
@@ -45,7 +47,7 @@
 				</ion-item>
 				<ion-item>
 					<ion-label floating>Start Time</ion-label>
-					<ion-datetime displayFormat="h: mm A" pickerFormat="h mm A" [(ngModel)]="entry.activity.dateActivity" [ngModelOptions]="{standalone: true}"></ion-datetime>
+					<ion-datetime displayFormat="h: mm A" pickerFormat="h mm A" [(ngModel)]="entry.activity.startTime" [ngModelOptions]="{standalone: true}"></ion-datetime>
 				</ion-item>
 				<ion-item>
 					<ion-label floating>Duration</ion-label>

@@ -1,8 +1,8 @@
 import { DiaryForm } from './diaryForm';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
-import { DiaryEntry } from '../../model/_model';
+import { DiaryEntry, User, CheckedSymptom } from '../../model/_model';
 
-describe('Page: News Form', () => {
+describe('Page: Diary Form', () => {
   let component: DiaryForm;
   let navController: NavController;
   let altController: AlertController;
@@ -12,9 +12,13 @@ describe('Page: News Form', () => {
   let entry: DiaryEntry;
   let type: string;
   let label: string;
+  let symptoms: CheckedSymptom[];
+  let userService: any;
 
   beforeEach(() => {
     userServiceMock = jasmine.createSpyObj('userService', ['getUsers']);
+    userService = jasmine.createSpyObj('userService', ['getCurrentUser']);
+    userService.getCurrentUser.and.returnValue(new User('1'));
     diaryServiceMock = jasmine.createSpyObj('diaryService', ['addNewEntry']);
     diaryServiceMock.addNewEntry.and.returnValue(null);
     navController = jasmine.createSpyObj('navController', ['push']);
@@ -23,6 +27,7 @@ describe('Page: News Form', () => {
     type = params.data.type;
     entry = new DiaryEntry ('', this.type, '', this.date, '1');
     label = 'md-analytics';
+    symptoms = [];
     component = new DiaryForm(params, altController, diaryServiceMock, navController, userServiceMock);
   });
 
@@ -36,12 +41,31 @@ describe('Page: News Form', () => {
     it('should initialize the type to empty', () => {
       expect(component.type).toEqual(type);
     });
+    it('should initialize the symptoms to empty', () => {
+      expect(component.symptoms).toEqual(symptoms);
+    });
   });
 
   describe('onSubmit', () => {
-    xit('new entry should have correct date', () =>{
+    it('should send the diary to the database', () =>{
+      component.onSubmit();
+      expect(component.reconvertArrayType).toHaveBeenCalled();
+      //expect(userService.getCurrentUser).toHaveBeenCalled();
+      expect(diaryServiceMock.addNewEntry).toHaveBeenCalled();
 
     });
   });
 
+  describe('chooseSymptoms', () => {
+    xit('should redirect to symptom list page', () => {
+      
+    });
+  });
+
+  describe('convertArrayType', () => {
+    it('should convert a RefSymptom to CheckedSymptom', () => {
+      
+    });
+  });
+  
 });

@@ -30,7 +30,7 @@ describe('Page: User Form', () => {
   describe('onSubmit', () => {
      let response: Observable<User>;
 
-    it('should call the NewsService', () => {
+    it('should call the UserService', () => {
       response = Observable.of(user).delay(1);
       userServiceMock.updateUser.and.returnValue(response);
       component.onSubmit();
@@ -45,7 +45,7 @@ describe('Page: User Form', () => {
         component.onSubmit();
       });
 
-      it('should add the news', (done) => {
+      it('should update the user', (done) => {
         response.subscribe(() => {
           expect(component.user.id_user).toBe('1');
           done();
