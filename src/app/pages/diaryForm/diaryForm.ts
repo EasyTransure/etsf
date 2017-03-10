@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { DiaryEntry, SymptomCheck, Medication, Activity, FreeEntry, RefActivity } from '../../model/_model';
 import { UserService, DiaryService } from '../../services/services';
+import { SymptomList } from '../pages';
 
 @Component({
   selector: 'page-diaryForm',
@@ -43,6 +44,10 @@ export class DiaryForm {
 
   public onSubmit() {
     this.diaryService.addNewEntry(this.userService.getCurrentUser(), this.entry);
+  }
+
+  public chooseSymptoms() {
+    this.navCtrl.push(SymptomList, {symptoms : this.entry.symptomCheck.symptoms});
   }
 
 }
