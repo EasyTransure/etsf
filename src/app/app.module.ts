@@ -1,9 +1,9 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { Home, DiaryForm, UserForm, DiaryDescription, MyDiary, Tabs, MyProfile, ActivityList, SymptomList } from './pages/pages';
+import { ConnectionLoginPage, Home, DiaryForm, UserForm, DiaryDescription, MyDiary, Tabs, MyProfile, ActivityList, SymptomList } from './pages/pages';
 import { DiaryService, ReferentialService, UserService, NewsService } from './services/services';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCKBUyON-7e8wmquWCSOonhqCxR58IYNoA",
@@ -13,9 +13,15 @@ export const firebaseConfig = {
   messagingSenderId: "476981943411"
 };
 
+const firebaseAuthConfig = {
+  provider: AuthProviders.Password,
+  method: AuthMethods.Password
+};
+
 @NgModule({
   declarations: [
     MyApp,
+    ConnectionLoginPage,
     Home,
     MyDiary,
     DiaryDescription,
@@ -23,16 +29,17 @@ export const firebaseConfig = {
     UserForm,
     Tabs,
     MyProfile,
-    ActivityList, 
+    ActivityList,
     SymptomList
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    ConnectionLoginPage,
     Home,
     MyDiary,
     DiaryDescription,

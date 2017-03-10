@@ -13,7 +13,7 @@ describe('Page: My Profile', () => {
 
   beforeEach(() => {
     user = new User('1');
-    userServiceMock = jasmine.createSpyObj('userService', ['getAUser']);
+    userServiceMock = jasmine.createSpyObj('userService', ['getCurrentUser']);
     navController = jasmine.createSpyObj('navController', ['push']);
     component = new MyProfile(navController, navParams, userServiceMock);
   });
@@ -32,40 +32,10 @@ describe('Page: My Profile', () => {
 
     it('should call the NewsService', () => {
       response = Observable.of(user).delay(1);
-      userServiceMock.getAUser.and.returnValue(response);
+      userServiceMock.getCurrentUser.and.returnValue(response);
       component.ionViewWillEnter();
 
-      expect(userServiceMock.getAUser).toHaveBeenCalledWith(user.id_user);
-    });
-
-    describe('upon successful response', () => {
-      beforeEach(() => {
-        response = Observable.of(user).delay(1);
-        userServiceMock.getAUser.and.returnValue(response);
-        component.ionViewWillEnter();
-      });
-
-      it('should load the user', (done) => {
-        response.subscribe(() => {
-          expect(component.user.id_user).toBe('1');
-          done();
-        });
-      });
-    });
-
-    describe('upon failure', () => {
-      it('should set that an error occurred', (done) => {
-        response = Observable.create((observer) => {
-          observer.error();
-        }).delay(1);
-        userServiceMock.getAUser.and.returnValue(response);
-        component.ionViewWillEnter();
-
-        response.subscribe(() => { }, () => {
-          expect(component.errorOccurred).toBe(true);
-          done();
-        });
-      });
+      expect(userServiceMock.getCurrentUser).toHaveBeenCalled();
     });
 
   });

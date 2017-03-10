@@ -27,46 +27,5 @@ describe('Page: User Form', () => {
     });
   });
 
-  describe('onSubmit', () => {
-     let response: Observable<User>;
-
-    it('should call the NewsService', () => {
-      response = Observable.of(user).delay(1);
-      userServiceMock.updateUser.and.returnValue(response);
-      component.onSubmit();
-
-      expect(userServiceMock.updateUser).toHaveBeenCalledWith('1', user);
-    });
-
-    describe('upon successful response', () => {
-      beforeEach(() => {
-        response = Observable.of(user).delay(1);
-        userServiceMock.updateUser.and.returnValue(response);
-        component.onSubmit();
-      });
-
-      it('should add the news', (done) => {
-        response.subscribe(() => {
-          expect(component.user.id_user).toBe('1');
-          done();
-        });
-      });
-    });
-
-    describe('upon failure', () => {
-      it('should set that an error occurred', (done) => {
-        response = Observable.create((observer) => {
-          observer.error();
-        }).delay(1);
-        userServiceMock.updateUser.and.returnValue(response);
-        component.onSubmit();
-
-        response.subscribe(() => { }, () => {
-          expect(component.errorOccurred).toBe(true);
-          done();
-        });
-      });
-    });
-  });
 
 });

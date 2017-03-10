@@ -1,75 +1,65 @@
 import {UserService} from '../services';
 import { User } from '../../model/_model';
-import { Observable } from 'rxjs/Observable';
+import { AngularFire } from 'angularfire2';
+
+class AngularFireMock extends AngularFire{
+  constructor(public auth, public database){
+    super(null, auth, database);
+  }
+}
 
 describe('User service', () => {
-  let userService: UserService = null, mockHttp;
+  let userService: UserService = null;
   let user: User;
+  let authSpy = jasmine.createSpyObj('authSpy', ['getAuth', 'login'])
 
   beforeEach(() => {
-    mockHttp = jasmine.createSpyObj('mockHttp', ['get', 'post', 'put', 'delete']);
-    userService = new UserService (mockHttp);
+    let mockAf = new AngularFireMock(authSpy, null);
+    userService = new UserService (mockAf);
     user = new User ('0');
   });
 
   describe('getCurrentUser', () => {
-    it('should return a mocked user', () => {
-      expect(userService.getCurrentUser().id_user).toBe('a123875114-bf258314');
-    });
-  })
-
-  describe('getUsers', () => {
-    it('should return all the users', () => {
-      mockHttp.get.and.returnValue(Observable.of([]));
-      userService.getUsers();
-
-      expect(mockHttp.get).toHaveBeenCalled();
+    it('should return null if user does not exist', () => {
+      authSpy.getAuth.and.returnValue(null);
+      expect(userService.getCurrentUser()).toBe(null);
     });
   });
 
-  describe('getAUser', () => {
-    it('should return the corresponding user', () => {
-      mockHttp.get.and.returnValue(Observable.of());
-      userService.getAUser('1');
+  describe('loginWithEmailAndPassword', () => {
+    let p: Promise<boolean>;
 
-      expect(mockHttp.get).toHaveBeenCalled();
+    describe('upon success', () => {
+      beforeEach(() => {
+        p = new Promise<boolean>(resolve => setTimeout(resolve(true), 1));
+        authSpy.login.and.returnValue(p);
+      });
+
+      it('should resolve', (done) => {
+        let res = userService.loginWithEmailAndPassword('em@il', 'pwd');
+        res.subscribe(val => {
+          expect(authSpy.login).toHaveBeenCalledWith({email: 'em@il', password: 'pwd'});
+          expect(val).toBe(true);
+          done();
+        });
+      });
+    });
+
+    describe('upon failure', () => {
+      beforeEach(() => {
+        p = new Promise<boolean>((resolve, reject) => setTimeout(reject(false), 1));
+        authSpy.login.and.returnValue(p);
+      });
+
+      it('should return false', (done) => {
+        let res = userService.loginWithEmailAndPassword('em@il', 'pwd');
+        res.subscribe((res) => {
+            expect(authSpy.login).toHaveBeenCalledWith({email: 'em@il', password: 'pwd'});
+            expect(res).toBe(false);
+            done();
+        });
+      });
     });
   });
 
-  describe('addUser', () => {
-    it('should return the added user', () => {
-      mockHttp.post.and.returnValue(Observable.of({}));
-      userService.addUser(user);
-
-      expect(mockHttp.post).toHaveBeenCalled();
-    });
-  });
-
-  describe('updateUser', () => {
-    it('should return the updated user', () => {
-      mockHttp.put.and.returnValue(Observable.of({}));
-      userService.updateUser(user.id_user, user);
-
-      expect(mockHttp.put).toHaveBeenCalled();
-    });
-  });
-
-  describe('deleteUser', () => {
-    it('should return the deleted user', () => {
-      mockHttp.delete.and.returnValue(Observable.of({}));
-      userService.deleteUser(user.id_user);
-
-      expect(mockHttp.delete).toHaveBeenCalled();
-    });
-  });
-/*
-  describe('extractData', () => {
-    it('should return the corresponding user', () => {
-      mockHttp.get.and.returnValue(Observable.of());
-      userService.getAUser(1);
-
-      expect(mockHttp.get).toHaveBeenCalled();
-    });
-  });
-*/
 });

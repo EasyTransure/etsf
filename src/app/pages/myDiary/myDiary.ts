@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController } from 'ionic-angular';
-import { DiaryEntry } from '../../model/_model';
+import { DiaryEntry, User } from '../../model/_model';
 import { DiaryService, UserService } from '../../services/services';
-import { DiaryDescription, DiaryForm, ActivityList } from '../pages'
+import { ConnectionLoginPage, DiaryDescription, DiaryForm, ActivityList } from '../pages'
 
 @Component({
   selector: 'page-myDiary',
@@ -71,9 +71,16 @@ export class MyDiary {
   }
 
   ionViewWillEnter() {
-    this.diaryService.getEntriesForUser(this.userService.getCurrentUser()).subscribe((entries) => {
-      this.myDiaryEntries = entries.reverse();
-    });
+    let user: User = this.userService.getCurrentUser();
+    if (!user) {
+      this.nav.push(ConnectionLoginPage);
+    }
+    else {
+      console.log('Getting diary for user');
+      this.diaryService.getEntriesForUser(user).subscribe((entries) => {
+        this.myDiaryEntries = entries.reverse();
+      });
+    }
   }
 
 }

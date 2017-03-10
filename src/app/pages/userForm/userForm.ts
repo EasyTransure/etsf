@@ -21,28 +21,15 @@ export class UserForm {
     console.log(this.user);
   }
 
-  /*
-  private addUser(user): void {
-    this._userService
-      .addUser(user)
-      .subscribe((data: User) => this.user = data,
-      error =>{
-              this.errorOccurred = true;
-              console.log(error)
-           },
-      () => console.log('User Added'));
-  }
-  */
-
   private updateUser(user): void {
-    this._userService
+    /*this._userService
       .updateUser(user.id_user, user)
       .subscribe((data: User) => this.user = data,
       error => {
         this.errorOccurred = true;
         console.log(error)
       },
-      () => console.log('User Modified'));
+      () => console.log('User Modified'));*/
   }
 
 }

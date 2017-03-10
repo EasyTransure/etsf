@@ -9,7 +9,7 @@ import { Home, Tabs, MyProfile } from './pages/pages';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Tabs;
+  rootPage: any = Home;
 
   pages: Array<{title: string, component: any}>;
 

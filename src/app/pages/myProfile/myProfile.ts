@@ -24,14 +24,7 @@ export class MyProfile {
   }
 
   public getUser(id_user: string): void {
-    this._userService
-      .getAUser(id_user)
-      .subscribe((data: User) => this.user = data,
-      error => {
-        this.errorOccurred = true;
-        console.log(error)
-      },
-      () => console.log('Get all Users complete'));
+    this.user = this._userService.getCurrentUser();
   }
 
 }

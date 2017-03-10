@@ -7,3 +7,4 @@ export * from './myProfile/myProfile';
 export * from './diaryDescription/diaryDescription';
 export * from './activityList/activityList';
 export * from './symptomList/symptomList';
+export * from './connectionLogin/connectionLogin';
