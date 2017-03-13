@@ -13,6 +13,12 @@ describe('Page: ConnectionLogin', () => {
     page = new ConnectionLoginPage(userServiceMock, navControllerMock);
   });
 
+  describe('ionViewWillEnter', () => {
+    it('should print if you entred.', () => {
+      page.ionViewWillEnter();
+    });
+  });
+
   describe('Login function', () => {
     beforeEach(() => {
       page.email = 'blabla@bla.fr';

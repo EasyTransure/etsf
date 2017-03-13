@@ -1,6 +1,7 @@
 import { DiaryForm } from './diaryForm';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
-import { DiaryEntry, User, CheckedSymptom } from '../../model/_model';
+import { DiaryEntry, User, CheckedSymptom, RefSymptom } from '../../model/_model';
+import { SymptomList } from '../pages';
 
 describe('Page: Diary Form', () => {
   let component: DiaryForm;
@@ -23,7 +24,7 @@ describe('Page: Diary Form', () => {
     altController = jasmine.createSpyObj('altController', ['present']);
     params = { data: { type: 'Medication' }, get: null };
     type = params.data.type;
-    entry = new DiaryEntry ('', this.type, '', this.date, '1');
+    entry = new DiaryEntry('', this.type, '', this.date, '1');
     label = 'md-analytics';
     symptoms = [];
     component = new DiaryForm(params, altController, diaryServiceMock, navController, userServiceMock);
@@ -44,24 +45,50 @@ describe('Page: Diary Form', () => {
     });
   });
 
-  describe('onSubmit', () => {
-    it('should send the diary to the database', () =>{
-      component.onSubmit();
-      //expect(userService.getCurrentUser).toHaveBeenCalled();
-      expect(diaryServiceMock.addNewEntry).toHaveBeenCalled();
+  describe('initType', () => {
+    it('should redirect to symptom list page', () => {
+      let type = ['SymptomCheck', 'Activity', 'FreeEntry'];
+      let label = ['md-american-football', 'md-paper-plane', 'md-thermometer'];
+      for (let i in type) {
+        component.initType(type[i]);
+        expect(component.labelD).toBe(label[i]);
+      }
+    });
+  });
 
+  describe('onSubmit', () => {
+    it('should send the diary to the database', () => {
+      params = { data: { type: 'SymptomCheck' }, get: null };
+      component = new DiaryForm(params, altController, diaryServiceMock, navController, userServiceMock);
+      component.onSubmit();
+      if (type == 'SymptomCheck') {
+        expect(component.reconvertArrayType).toHaveBeenCalled();
+      }
+      expect(diaryServiceMock.addNewEntry).toHaveBeenCalled();
+      expect(navController.popToRoot).toHaveBeenCalled();
     });
   });
 
   describe('chooseSymptoms', () => {
-    xit('should redirect to symptom list page', () => {
-
+    it('should redirect to symptom list page', () => {
+      component.chooseSymptoms();
+      expect(navController.push).toHaveBeenCalledWith(SymptomList, { symptoms: component.symptoms });
     });
   });
 
   describe('convertArrayType', () => {
     it('should convert a RefSymptom to CheckedSymptom', () => {
+      let unchecked: RefSymptom[] = [new RefSymptom('', '')];
+      let a = component.convertArrayType(unchecked);
+      expect(a[0].checked).toBe(false);
+    });
+  });
 
+  describe('reconvertArrayType', () => {
+    it('should convert a CheckedSymptom to RefSymptom', () => {
+      let checked: CheckedSymptom[] = [new CheckedSymptom('', '', true)];
+      let a = component.reconvertArrayType(checked);
+      expect(a[0].id).toBe('');
     });
   });
 

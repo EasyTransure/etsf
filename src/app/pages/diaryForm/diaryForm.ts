@@ -20,27 +20,33 @@ export class DiaryForm {
     public navCtrl: NavController, public userService: UserService) {
     this.type = params.data.type;
     this.entry = new DiaryEntry('', this.type, '', (new Date()).getTime().toString(), 'a123875114-bf258314');
-    if (this.type == 'SymptomCheck') {
-      this.labelD = 'md-american-football';
-      let symptomCheck: SymptomCheck = new SymptomCheck(3);
-      this.entry.symptomCheck = symptomCheck;
-      this.symptoms = this.convertArrayType(this.entry.symptomCheck.symptoms);
-    }
-    if (this.type == 'Medication') {
-      this.labelD = 'md-analytics';
-      let medication: Medication = new Medication();
-      this.entry.medication = medication;
-    }
-    if (this.type == 'Activity') {
-      this.labelD = 'md-paper-plane';
-      let activ: RefActivity = params.data.activity;
-      let activity: Activity = new Activity(activ, '', '', 0);
-      this.entry.activity = activity;
-    }
-    if (this.type == 'FreeEntry') {
-      this.labelD = 'md-thermometer';
-      let freeEntry: FreeEntry = new FreeEntry();
-      this.entry.freeEntry = freeEntry;
+    this.initType(this.type);
+  }
+
+  public initType(type: String) {
+    switch (type) {
+      case 'SymptomCheck':
+        this.labelD = 'md-american-football';
+        let symptomCheck: SymptomCheck = new SymptomCheck(3, []);
+        this.entry.symptomCheck = symptomCheck;
+        this.symptoms = this.convertArrayType(this.entry.symptomCheck.symptoms);
+        break;
+      case 'Medication':
+        this.labelD = 'md-analytics';
+        let medication: Medication = new Medication();
+        this.entry.medication = medication;
+        break;
+      case 'Activity':
+        this.labelD = 'md-paper-plane';
+        let activ: RefActivity = this.params.data.activity;
+        let activity: Activity = new Activity(activ, '', '', 0);
+        this.entry.activity = activity;
+        break;
+      case 'FreeEntry':
+        this.labelD = 'md-thermometer';
+        let freeEntry: FreeEntry = new FreeEntry();
+        this.entry.freeEntry = freeEntry;
+        break;
     }
   }
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {AngularFire} from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 
 import { ConnectionLoginPage, Tabs } from '../pages';
 
@@ -11,7 +11,7 @@ import { ConnectionLoginPage, Tabs } from '../pages';
 
 export class Home {
 
-  constructor( nav: NavController, private af: AngularFire) {
+  constructor(nav: NavController, private af: AngularFire) {
     let goToLogin = setTimeout(() => {
       nav.setRoot(Tabs);
       nav.push(ConnectionLoginPage);

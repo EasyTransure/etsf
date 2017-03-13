@@ -57,9 +57,7 @@ export class MyDiary {
         {
           text: 'Cancel',
           role: 'cancel', // will always sort to be on the bottom
-          icon: 'close',
-          handler: () => {
-          }
+          icon: 'close'
         }
       ]
     });

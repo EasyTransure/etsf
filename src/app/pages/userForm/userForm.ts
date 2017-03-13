@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { User } from '../../model/_model';
+import { MyProfile } from '../myProfile/myProfile';
 import { UserService } from '../../services/services';
 
 @Component({
@@ -18,18 +19,11 @@ export class UserForm {
 
   public onSubmit() {
     this.updateUser(this.user);
-    console.log(this.user);
+    this.navCtrl.push(MyProfile);
   }
 
-  private updateUser(user): void {
-    /*this._userService
-      .updateUser(user.id_user, user)
-      .subscribe((data: User) => this.user = data,
-      error => {
-        this.errorOccurred = true;
-        console.log(error)
-      },
-      () => console.log('User Modified'));*/
+  public updateUser(user): void {
+    console.log(user);
   }
 
 }

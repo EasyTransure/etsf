@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-//import { Observable } from 'rxjs/Observable';
 
 import { DiaryEntry, User } from '../../model/_model';
 
 @Injectable()
 export class DiaryService {
 
-  private entriesForUser: FirebaseListObservable<DiaryEntry[]>;
+  public entriesForUser: FirebaseListObservable<DiaryEntry[]>;
 
   constructor(private af: AngularFire) { }
 
@@ -24,8 +23,8 @@ export class DiaryService {
     });
   }
 
-  private initEntriesForUser(uid: string): void{
-    if (!this.entriesForUser){
+  private initEntriesForUser(uid: string): void {
+    if (!this.entriesForUser) {
       this.entriesForUser = this.af.database.list('/diary/' + uid);
     }
   }

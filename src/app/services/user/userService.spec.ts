@@ -1,9 +1,9 @@
-import {UserService} from '../services';
+import { UserService } from '../services';
 import { User } from '../../model/_model';
 import { AngularFire } from 'angularfire2';
 
-class AngularFireMock extends AngularFire{
-  constructor(public auth, public database){
+class AngularFireMock extends AngularFire {
+  constructor(public auth, public database) {
     super(null, auth, database);
   }
 }
@@ -15,8 +15,8 @@ describe('User service', () => {
 
   beforeEach(() => {
     let mockAf = new AngularFireMock(authSpy, null);
-    userService = new UserService (mockAf);
-    user = new User ('0');
+    userService = new UserService(mockAf);
+    user = new User('0');
   });
 
   describe('getCurrentUser', () => {
@@ -38,7 +38,7 @@ describe('User service', () => {
       it('should resolve', (done) => {
         let res = userService.loginWithEmailAndPassword('em@il', 'pwd');
         res.subscribe(val => {
-          expect(authSpy.login).toHaveBeenCalledWith({email: 'em@il', password: 'pwd'});
+          expect(authSpy.login).toHaveBeenCalledWith({ email: 'em@il', password: 'pwd' });
           expect(val).toBe(true);
           done();
         });
@@ -54,9 +54,9 @@ describe('User service', () => {
       it('should return false', (done) => {
         let res = userService.loginWithEmailAndPassword('em@il', 'pwd');
         res.subscribe((res) => {
-            expect(authSpy.login).toHaveBeenCalledWith({email: 'em@il', password: 'pwd'});
-            expect(res).toBe(false);
-            done();
+          expect(authSpy.login).toHaveBeenCalledWith({ email: 'em@il', password: 'pwd' });
+          expect(res).toBe(false);
+          done();
         });
       });
     });

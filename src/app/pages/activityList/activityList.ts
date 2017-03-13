@@ -12,9 +12,8 @@ import { DiaryForm } from '../pages'
 
 export class ActivityList {
     public activities: RefActivity[] = [];
-    public temp: FirebaseListObservable<RefActivity[]>;
-    public activity: RefActivity;
-    public type: string;
+    public temp: FirebaseListObservable<RefActivity[]> = null;
+    public type: string = '';
     public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
     constructor(private refService: ReferentialService, public params: NavParams, public nav: NavController) {

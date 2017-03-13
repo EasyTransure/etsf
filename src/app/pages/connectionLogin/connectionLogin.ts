@@ -22,9 +22,6 @@ export class ConnectionLoginPage {
   public login() {
     this.userService.loginWithEmailAndPassword(this.email, this.password).subscribe(val => {
       this.loginError = !val;
-      /*if (!this.loginError){
-        this.navController.pop();
-      }*/
     });
   }
 

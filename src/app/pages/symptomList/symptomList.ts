@@ -11,8 +11,8 @@ import { DiaryForm } from '../pages'
 })
 
 export class SymptomList {
-    public symptoms: CheckedSymptom[];
-    public temp: FirebaseListObservable<RefSymptom[]>;
+    public symptoms: CheckedSymptom[] = [];
+    public temp: FirebaseListObservable<RefSymptom[]> = null;
     public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
 
     constructor(private refService: ReferentialService, private nav: NavController, private params: NavParams) { }
