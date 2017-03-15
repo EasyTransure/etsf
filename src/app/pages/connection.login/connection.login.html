@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <img src="http://logodatabases.com/wp-content/uploads/2012/07/capgemini-logo-wallpaper-500x304.jpg" />
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label stacked>Email</ion-label>
+        <ion-input [(ngModel)]="email" type="email" placeholder="Your e-mail address"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Password</ion-label>
+        <ion-input [(ngModel)]="password" type="password" placeholder="Your password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-item color="danger" *ngIf="loginError">Invalid login or password</ion-item>
+    <button (click)="login()" ion-button block> Login </button>
+    <button ion-button block clear (click)="goToSignup()">Create a new account</button>
+    <button ion-button block clear (click)="goToResetPassword()">I forgot my password</button>
+  </ion-card>
+</ion-content>

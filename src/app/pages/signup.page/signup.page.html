@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Sign up</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card>
+        <img src="http://logodatabases.com/wp-content/uploads/2012/07/capgemini-logo-wallpaper-500x304.jpg" />
+        <form (ngSubmit)="signUp()">
+            <ion-list no-lines>
+                <ion-item>
+                    <ion-label stacked>Email</ion-label>
+                    <ion-input [(ngModel)]="email" [ngModelOptions]="{standalone: true}" type="email" placeholder="Your e-mail address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label stacked>Password</ion-label>
+                    <ion-input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" type="password" placeholder="Your password"></ion-input>
+                </ion-item>
+            </ion-list>
+            <button ion-button block> Sign up </button>
+        </form>
+    </ion-card>
+</ion-content>

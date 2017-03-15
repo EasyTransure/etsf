@@ -1,12 +1,16 @@
-import { Tabs } from './tabs';
-import { MyDiary } from '../pages';
+import { MyDiary, Tabs } from '../pages';
+import { User } from '../../model/_model';
 
 
 describe('Page: Tabs', () => {
   let component: Tabs;
+  let user: User;
+  let userService: any;
 
   beforeEach(() => {
-    component = new Tabs();
+    user = new User('1', '', '', '', 1);
+    userService = jasmine.createSpyObj('userService', ['getCurrentUser']);
+    component = new Tabs(userService);
   });
 
   describe('at initialization', () => {
@@ -24,6 +28,14 @@ describe('Page: Tabs', () => {
     });
     it('should initialize the nombre of my news to 0', () => {
       expect(component.tabCount3).toEqual(0);
+    });
+  });
+
+  describe('ion will enter', () => {
+    it('should call the user service', () => {
+      userService.getCurrentUser.and.returnValue(new User('1'));
+      component.ionViewWillEnter();
+      expect(userService.getCurrentUser).toHaveBeenCalled();
     });
   });
 });

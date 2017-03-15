@@ -1,3 +1,3 @@
-export * from './diary/diary.service';
-export * from './user/userService';
-export * from './referential/referential.service';
+export * from './diary.service/diary.service';
+export * from './user.service/userService';
+export * from './referential.service/referential.service';
