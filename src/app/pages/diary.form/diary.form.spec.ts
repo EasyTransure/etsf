@@ -15,11 +15,11 @@ describe('Page: Diary Form', () => {
   let symptoms: CheckedSymptom[];
 
   beforeEach(() => {
-    userServiceMock = jasmine.createSpyObj('userService', ['getUsers', 'getCurrentUser']);
+    userServiceMock = jasmine.createSpyObj('userService', ['getCurrentUser', 'updateUser']);
     userServiceMock.getCurrentUser.and.returnValue(new User('1'));
     diaryServiceMock = jasmine.createSpyObj('diaryService', ['addNewEntry']);
     diaryServiceMock.addNewEntry.and.returnValue(null);
-    navController = jasmine.createSpyObj('navController', ['push', 'popToRoot']);
+    navController = jasmine.createSpyObj('navController', ['push', 'popTo']);
     altController = jasmine.createSpyObj('altController', ['present']);
     params = { data: { type: 'Medication' }, get: null };
     type = params.data.type;
@@ -30,9 +30,6 @@ describe('Page: Diary Form', () => {
   });
 
   describe('at initialization', () => {
-    it('should initialize the error indicator to false', () => {
-      expect(component.errorOccurred).toBe(false);
-    });
     it('should initialize the label to empty', () => {
       expect(component.labelD).toEqual(label);
     });
@@ -64,7 +61,8 @@ describe('Page: Diary Form', () => {
         expect(component.reconvertArrayType).toHaveBeenCalled();
       }
       expect(diaryServiceMock.addNewEntry).toHaveBeenCalled();
-      expect(navController.popToRoot).toHaveBeenCalled();
+      expect(userServiceMock.updateUser).toHaveBeenCalled();
+      expect(navController.popTo).toHaveBeenCalled();
     });
   });
 

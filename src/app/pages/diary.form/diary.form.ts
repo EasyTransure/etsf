@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
-import { DiaryEntry, SymptomCheck, Medication, Activity, FreeEntry, RefActivity, CheckedSymptom, RefSymptom } from '../../model/_model';
+import { DiaryEntry, User, SymptomCheck, Medication, Activity, FreeEntry, RefActivity, CheckedSymptom, RefSymptom } from '../../model/_model';
 import { UserService, DiaryService } from '../../services/services';
-import { SymptomList } from '../pages';
+import { SymptomList, Tabs } from '../pages';
 
 @Component({
   selector: 'page-diaryForm',
@@ -13,14 +13,15 @@ export class DiaryForm {
   public entry: DiaryEntry;
   public type: string = '';
   public labelD: string = '';
+  public user: User;
   public symptoms: CheckedSymptom[] = [];
-  public errorOccurred = false;     // Field is never really used, but it is to illustrate what happens when an async call fails.
-
+  
   constructor(public params: NavParams, public alertCtrl: AlertController, private diaryService: DiaryService,
     public navCtrl: NavController, public userService: UserService) {
     this.type = params.data.type;
     this.entry = new DiaryEntry('', this.type, '', (new Date()).getTime().toString(), 'a123875114-bf258314');
     this.initType(this.type);
+    this.user = userService.getCurrentUser();
   }
 
   public initType(type: String) {
@@ -54,8 +55,10 @@ export class DiaryForm {
     if (this.type == 'SymptomCheck') {
       this.entry.symptomCheck.symptoms = this.reconvertArrayType(this.symptoms);
     }
-    this.diaryService.addNewEntry(this.userService.getCurrentUser(), this.entry);
-    this.navCtrl.popToRoot();
+    this.diaryService.addNewEntry(this.user, this.entry);
+    this.user.number++;
+    this.userService.updateUser(this.user);
+    this.navCtrl.popTo(Tabs);
   }
 
   public chooseSymptoms() {

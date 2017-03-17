@@ -1,3 +1,4 @@
+import { TestBed, inject } from '@angular/core/testing';
 import { UserService } from '../services';
 import { User } from '../../model/_model';
 import { AngularFire } from 'angularfire2';
@@ -19,16 +20,31 @@ describe('User service', () => {
     let afDatabase = {
       database: afMock
     }
-    let mockAf = new AngularFireMock(authSpy, null);
-    userService = new UserService(mockAf);
     user = new User('0');
+    TestBed.configureTestingModule({
+      providers: [UserService, { provide: AngularFire, useValue: afDatabase }]
+    });
+    let mockAf = new AngularFireMock(authSpy, afDatabase);
+    userService = new UserService(mockAf);
   });
+
+  it('should ...', inject([UserService], (service: UserService) => {
+    expect(service).toBeTruthy();
+  }));
 
   describe('getCurrentUser', () => {
     it('should return null if user does not exist', () => {
       authSpy.getAuth.and.returnValue(null);
       expect(userService.getCurrentUser()).toBe(null);
     });
+  });
+
+  describe('updateUser', () => {
+    xit('should update the current user', inject([UserService], (service: UserService) => {
+      service.userOb = this.mockAf.afDatabase.object('/user/', + '1');
+      service.updateUser(user);
+      expect(service.userOb.update).toHaveBeenCalled();
+    }));
   });
 
   describe('loginWithEmailAndPassword', () => {

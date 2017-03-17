@@ -22,15 +22,14 @@ describe('Page: User Form', () => {
     it('should initialize the users', () => {
       expect(component.user).toEqual(user);
     });
-    it('should initialize the error indicator to false', () => {
-      expect(component.errorOccurred).toBe(false);
-    });
   });
 
   describe('onSubmit', () => {
     it('should log the user and bring back to my profile', () => {
       component.onSubmit();
+      expect(userServiceMock.updateUser).toHaveBeenCalled();
       expect(navController.push).toHaveBeenCalledWith(MyProfile);
     });
   });
+
 });

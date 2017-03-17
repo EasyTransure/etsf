@@ -19,7 +19,7 @@ export class MyProfile {
     this.getUser();
   }
 
-  public updateAUser(user: User) {
+  public updateUser(user: User) {
     this.nav.push(UserForm, { user: user });
   }
 

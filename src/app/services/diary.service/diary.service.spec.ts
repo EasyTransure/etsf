@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { AngularFire } from 'angularfire2';
 import { User } from '../../model/_model';
-import { DiaryService } from './diary.service';
+import { DiaryService } from '../services';
 
 describe('DiaryServiceService', () => {
   let afMock;

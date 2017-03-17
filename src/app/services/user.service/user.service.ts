@@ -6,6 +6,7 @@ import { User } from '../../model/_model';
 @Injectable()
 export class UserService {
   public user: User = null;
+  public userOb: FirebaseObjectObservable<User>;
 
   constructor(private af: AngularFire) {
   }
@@ -17,6 +18,14 @@ export class UserService {
     else {
       return null;
     }
+  }
+
+  public updateUser(user: User): void {
+    let key: string = user.id_user;
+    this.userOb.subscribe((data) => {
+       data[key] = user;
+       this.userOb.update(data);
+    });
   }
 
   public loginWithEmailAndPassword(email: string, password: string): Observable<boolean> {
@@ -39,13 +48,11 @@ export class UserService {
 
   public initUser(): FirebaseObjectObservable<User> {
     let uid: string = this.af.auth.getAuth().uid;
-    let userOb: FirebaseObjectObservable<User>;
-    userOb = this.af.database.object('/user/', + uid);
-    userOb.subscribe((data) => {
+    this.userOb = this.af.database.object('/user/', + uid);
+    this.userOb.subscribe((data) => {
       this.user = data[uid];
-      this.user.id_user = uid;
     });
-    return userOb;
+    return this.userOb;
   }
 
 }

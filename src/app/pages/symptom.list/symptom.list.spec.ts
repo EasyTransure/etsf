@@ -32,6 +32,7 @@ describe('Page: My Symptom List', () => {
 
     describe('ionViewWillEnter', () => {
         it('should initialize the symptom list', () => {
+            refService.getSymptoms.and.returnValue(Observable.from([]));
             component.ionViewWillEnter();
             expect(component.symptoms).toBe(navParams.data.symptoms);
             expect(refService.getSymptoms).toHaveBeenCalled();
@@ -50,31 +51,31 @@ describe('Page: My Symptom List', () => {
         });
     });
 
-    describe('onSubmit', () => {
+    describe('on submit', () => {
         it('should redirect to diary form with checked symptoms', () => {
             component.onSubmit();
             expect(navController.popTo).toHaveBeenCalledWith(DiaryForm, { symptoms: component.symptoms });
         });
     });
 /*
-    describe('initializeSymptoms', () => {
+    describe('initialize the symptoms', () => {
         it('initialise the symptoms', () => {
             let sympt: RefSymptom = new RefSymptom('', '');
+            component.temp = refService.getSymptoms;
             component.initializeSymptoms();
-            component.temp = refService.getSymptoms();
             if (component.symptoms.length === 0) {
                 expect(component.symptoms.length).toBeGreaterThan(0);
                 expect(component.convertType).toHaveBeenCalledWith(sympt);
             } else {
-
+                ;
             }
         });
     });
 
-    describe('searchSymptoms', () => {
+    describe('search through symptoms', () => {
         it('should redirect to diary creation page', () => {
+            component.temp = refService.getSymptoms;
             component.searchSymptoms(event);
-            component.temp = refService.getSymptoms();
             expect(component.initializeSymptoms).toHaveBeenCalled();
             expect(component.symptoms.filter).toHaveBeenCalled();
         });

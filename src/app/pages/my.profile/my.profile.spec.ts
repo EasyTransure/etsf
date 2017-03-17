@@ -39,9 +39,9 @@ describe('Page: My Profile', () => {
 
   });
 
-  describe('updateAUser', () => {
+  describe('updateUser', () => {
     it('should redirect to user edition page', () => {
-      component.updateAUser(user);
+      component.updateUser(user);
       expect(navController.push).toHaveBeenCalledWith(UserForm, { user });
     });
   });
