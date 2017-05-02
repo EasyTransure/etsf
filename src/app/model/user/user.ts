@@ -1,22 +1,22 @@
 export class User {
-  public id_user: string;
+  public uid: string;
   public name: string;
   public surname: string;
   public email: string;
-  public number: number
+  public image: string;
 
   constructor(
-    id_user: string,
+    uid: string,
     name?: string,
     surname?: string,
     email?: string,
-    number?: number
+    image?: string
   ) {
-    this.id_user = id_user;
+    this.uid = uid;
     this.name = name ? name : '';
     this.surname = surname ? surname : '';
     this.email = email ? email : '';
-    this.number = number ? number : 0;
+    this.image = image ? image : '';
   }
 
 }

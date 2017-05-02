@@ -1,27 +1,44 @@
 import { NavController } from 'ionic-angular';
-import { Tabs, Home } from '../pages';
-import { Observable } from 'rxjs/Observable';
 import { User } from '../../model/_model';
+import { Home } from '../pages';
+import { UserForm } from '../pages';
 
 describe('Page: home', () => {
     let component: Home;
     let navController: NavController;
-    let aFire;
-    let userService: any;
+    let userServiceMock: any;
+    let user: User;
 
     beforeEach(() => {
-        navController = jasmine.createSpyObj('navController', ['push', 'setRoot']);
-        userService = jasmine.createSpyObj('userService', ['initUser']);
-        aFire = { auth: Observable.of({ uid: 'ABC123' }) };
-        component = new Home(userService, navController, aFire);
+        user = new User('1');
+        userServiceMock = jasmine.createSpyObj('userService', ['getCurrentUser', 'logout']);
+        component = new Home(navController, userServiceMock);
     });
 
     describe('ion view will enter', () => {
         it('should set the root page', () => {
-            userService.initUser.and.returnValue(Observable.of(new User('1')));
             component.ionViewWillEnter();
-            expect(userService.initUser).toHaveBeenCalled();
-            expect(navController.setRoot).toHaveBeenCalledWith(Tabs);
         });
     });
+
+    describe('change picture', () => {
+        it('should set the root page', () => {
+            component.goToCamera();
+        });
+    });
+
+    describe('updateUser', () => {
+        it('should redirect to user edition page', () => {
+            component.updateUser(user);
+            expect(navController.push).toHaveBeenCalledWith(UserForm, { user });
+        });
+    });
+
+    describe('log out', () => {
+        it('should log out the user and redirect to connection', () => {
+            component.logout();
+            expect(userServiceMock.logout).toHaveBeenCalled();
+        });
+    });
+
 })

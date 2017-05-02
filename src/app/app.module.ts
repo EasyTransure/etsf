@@ -1,18 +1,17 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { ConnectionLoginPage, Home, DiaryForm, UserForm, DiaryDescription, ResetPassword,
-   MyDiary, Tabs, MyProfile, ActivityList, SymptomList, SignUpPage } from './pages/pages';
-import { DiaryService, ReferentialService, UserService  } from './services/services';
+import { Home, ConnectionLoginPage, SignUpPage, Base, UserForm } from './pages/pages';
+import { UserService } from './services/services';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
-import { SymptomPipe } from './components/components';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyCKBUyON-7e8wmquWCSOonhqCxR58IYNoA",
-  authDomain: "angegardienionic.firebaseapp.com",
-  databaseURL: "https://angegardienionic.firebaseio.com",
-  storageBucket: "angegardienionic.appspot.com",
-  messagingSenderId: "476981943411"
+  apiKey: "AIzaSyA_-aXRWOHtfJijAJqFPq7okDhuCuB5E68",
+  authDomain: "ets-back.firebaseapp.com",
+  databaseURL: "https://ets-back.firebaseio.com",
+  projectId: "ets-back",
+  storageBucket: "ets-back.appspot.com",
+  messagingSenderId: "395354565581"
 };
 
 const firebaseAuthConfig = {
@@ -23,19 +22,11 @@ const firebaseAuthConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    ConnectionLoginPage,
     Home,
-    MyDiary,
-    DiaryDescription,
-    DiaryForm,
-    UserForm,
-    Tabs,
-    MyProfile,
-    ActivityList,
-    SymptomList,
-    SymptomPipe,
+    Base,
     SignUpPage,
-    ResetPassword
+    UserForm,
+    ConnectionLoginPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -44,19 +35,13 @@ const firebaseAuthConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ConnectionLoginPage,
     Home,
-    MyDiary,
-    DiaryDescription,
-    DiaryForm,
-    UserForm,
-    Tabs,
-    MyProfile,
-    ActivityList,
-    SymptomList,
+    Base,
     SignUpPage,
-    ResetPassword
+    UserForm,
+    ConnectionLoginPage
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DiaryService, ReferentialService, UserService]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, UserService]
 })
+
 export class AppModule { }

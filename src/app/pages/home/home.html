@@ -1,12 +1,50 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button color="primary" menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Journal de bord</ion-title>
+    <ion-title>ETS</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="primary" (click)="logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Loading...</h3>
+<ion-content padding class="body">
+  <div *ngIf='user'>
+    <h2> My Info </h2>
+    <ion-card>
+      <div style="position: relative">
+        <img [src]="user.image" alt="Profile picture" />
+        <ion-fab id='imageChange'>
+          <button ion-fab color="primary" (click)="goToCamera()" mini><ion-icon name="aperture"></ion-icon></button>
+        </ion-fab>
+      </div>
+
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col width-33 class="header">Name : </ion-col>
+            <ion-col col-auto>{{ user.name }}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col width-33 class="header">Surname : </ion-col>
+            <ion-col col-auto>{{ user.surname }}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col width-33 class="header">Email : </ion-col>
+            <ion-col col-auto>{{ user.email }}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-fab bottom right>
+    <button ion-fab (click)="updateUser(user)" id="update" mini>
+      <ion-icon name="create"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

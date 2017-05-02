@@ -1,3 +1,25 @@
 page-home {
-
+  .body {
+    color: black;
+    background-color: #eeeded;
+  }
+  .item-ios.item-block .item-inner {
+    border-bottom: none;
+  }
+  h2 {
+    text-align: center;
+  }
+  #imageChange {
+    bottom: 0px;
+    right: 0px;
+    margin-right: 4px;
+    font-size: 35px;
+    position: absolute;
+  }
+  .treatements ion-col {
+    text-align: right;
+  }
+  .header {
+    font-weight: bold;
+  }
 }

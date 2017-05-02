@@ -1,7 +1,7 @@
 import { NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { UserService } from '../../services/services';
-import { SignUpPage, ResetPassword } from '../pages';
+import { SignUpPage } from '../pages';
 
 @Component({
   selector: 'page-connectionLogin',
@@ -28,10 +28,6 @@ export class ConnectionLoginPage {
 
   public goToSignup() {
     this.navController.push(SignUpPage);
-  }
-
-  public goToResetPassword() {
-    this.navController.push(ResetPassword);
   }
 
 }

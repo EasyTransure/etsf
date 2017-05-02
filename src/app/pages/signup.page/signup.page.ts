@@ -1,4 +1,3 @@
-import { NavController, ToastController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { UserService } from '../../services/services';
 
@@ -10,21 +9,18 @@ import { UserService } from '../../services/services';
 export class SignUpPage {
     public email: string;
     public password: string;
+    public loginError: boolean;
 
-    public constructor(private userService: UserService, private navController: NavController, private toastCtrl: ToastController) { }
+    public constructor(private userService: UserService) { }
 
     ionViewWillEnter() {
         console.log('entering sign up page');
     }
 
     public signUp() {
-        console.log('sign up');
-        let toast = this.toastCtrl.create({
-            message: 'User has been signed up',
-            duration: 3000
+        this.userService.signUp(this.email, this.password).subscribe(val => {
+            this.loginError = !val;
         });
-        toast.present();
-        this.navController.pop();
     }
 
 }

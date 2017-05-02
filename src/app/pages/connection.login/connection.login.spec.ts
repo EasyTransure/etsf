@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Rx';
-import { SignUpPage, ResetPassword, ConnectionLoginPage } from '../pages';
+import { SignUpPage, ConnectionLoginPage } from '../pages';
 
 describe('Page: ConnectionLogin', () => {
 
@@ -20,7 +20,7 @@ describe('Page: ConnectionLogin', () => {
   describe('Login function', () => {
     beforeEach(() => {
       page.email = 'blabla@bla.fr';
-      page.password='1234';
+      page.password = '1234';
     });
 
     it('should call login', () => {
@@ -48,11 +48,11 @@ describe('Page: ConnectionLogin', () => {
 
   describe('upon error', () => {
     let obs: Observable<boolean>;
-      beforeEach(() => {
-        obs = Observable.from([false]).delay(1);
-        userServiceMock.loginWithEmailAndPassword.and.returnValue(obs);
-        page.login();
-      });
+    beforeEach(() => {
+      obs = Observable.from([false]).delay(1);
+      userServiceMock.loginWithEmailAndPassword.and.returnValue(obs);
+      page.login();
+    });
 
     it('should set loginError to true', (done) => {
       obs.subscribe(() => {
@@ -68,11 +68,5 @@ describe('Page: ConnectionLogin', () => {
       expect(navControllerMock.push).toHaveBeenCalledWith(SignUpPage);
     });
   });
- 
-  describe('go to reset password page', () => {
-    it('should redirect to the reset password page', () => {
-      page.goToResetPassword();
-      expect(navControllerMock.push).toHaveBeenCalledWith(ResetPassword);
-    });
-  });
+  
 });

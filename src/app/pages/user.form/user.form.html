@@ -1,33 +1,36 @@
 <ion-header>
   <ion-navbar>
-		<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Formulaire Utilisateur</ion-title>
+    <ion-title>Update profile</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-right color="primary" (click)="onSubmit()">
+				Send
+				<ion-icon name="send"></ion-icon>
+			</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-	<form (ngSubmit)="onSubmit()">
-		<ion-list no-lines>
-			<ion-item>
-				<ion-label floating>Nom</ion-label>
-				<ion-input type="text" [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}" required></ion-input>
-			</ion-item>
-	  
-			<ion-item>
-				<ion-label floating>Prénom</ion-label>
-				<ion-input type='text' [(ngModel)]="user.surname" [ngModelOptions]="{standalone: true}"></ion-input>
-			</ion-item>
+<ion-content padding class="body">
+  <form (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-card>
+        <ion-card-content>
+          <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input type="text" id="name" [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}" required></ion-input>
+          </ion-item>
 
-			<ion-item>
-				<ion-label floating>E-mail</ion-label>
-        <ion-input type="email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}"></ion-input>
-			</ion-item>
-	  
-			<ion-item>
-				<button ion-button block type="submit">Valider</button>
-			</ion-item>
-		</ion-list>
-	</form>
+          <ion-item>
+            <ion-label floating>Surname</ion-label>
+            <ion-input type='text' id="surname" [(ngModel)]="user.surname" [ngModelOptions]="{standalone: true}"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>E-mail</ion-label>
+            <ion-input type="email" id="email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" disabled></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </form>
 </ion-content>
